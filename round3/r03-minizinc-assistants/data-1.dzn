@@ -1,0 +1,15 @@
+nofGroups = 3;
+nofAssistants = 3;
+groupName = ["G1","G2","G3"];
+groupMinCapacity = [1,2,2];
+
+assistantName = ["A1","A2","A3"];
+assistantMaxGroups = [2,3,3];
+assistantGroupOk = [|true,true,true |
+false,true,true|
+true,true,false|];
+assistantExperience = [1,2,3];
+assistantCost = [10,15,20];
+
+budget = 100;
+
