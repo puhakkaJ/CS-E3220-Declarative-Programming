@@ -1,0 +1,2069 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> spec
+Rule 1     spec -> statement
+Rule 2     spec -> statement spec
+Rule 3     statement -> TYPE ID EQ setexpr SEMICOLON
+Rule 4     statement -> SOURCE initlist SEMICOLON
+Rule 5     statement -> SOURCEFORMULA boolexpr SEMICOLON
+Rule 6     statement -> TARGET boolexpr SEMICOLON
+Rule 7     setexpr -> LBRACK NUMBER COMMA NUMBER RBRACK
+Rule 8     setexpr -> LBRACE stringlist RBRACE
+Rule 9     setexpr -> ID
+Rule 10    stringlist -> enum
+Rule 11    enum -> ID
+Rule 12    enum -> NUMBER
+Rule 13    stringlist -> enum COMMA stringlist
+Rule 14    boolexpr -> boolexpr AND boolexpr
+Rule 15    boolexpr -> boolexpr OR boolexpr
+Rule 16    boolexpr -> boolexpr IMPL boolexpr
+Rule 17    boolexpr -> boolexpr EQVI boolexpr
+Rule 18    boolexpr -> NOT boolexpr
+Rule 19    boolexpr -> PTRUE
+Rule 20    boolexpr -> PFALSE
+Rule 21    boolexpr -> atom
+Rule 22    boolexpr -> LPAREN boolexpr RPAREN
+Rule 23    boolexpr -> LBRACK numexpr GT numexpr RBRACK
+Rule 24    boolexpr -> LBRACK numexpr LT numexpr RBRACK
+Rule 25    boolexpr -> LBRACK numexpr GEQ numexpr RBRACK
+Rule 26    boolexpr -> LBRACK numexpr LEQ numexpr RBRACK
+Rule 27    boolexpr -> LBRACK numexpr EQ numexpr RBRACK
+Rule 28    numexpr -> LPAREN numexpr RPAREN
+Rule 29    numexpr -> NUMBER
+Rule 30    numexpr -> atom
+Rule 31    numexpr -> numexpr PLUS numexpr
+Rule 32    numexpr -> numexpr MINUS numexpr
+Rule 33    numexpr -> numexpr TIMES numexpr
+Rule 34    tnumexpr -> LPAREN numexpr RPAREN
+Rule 35    tnumexpr -> NUMBER
+Rule 36    tnumexpr -> ID
+Rule 37    tnumexpr -> tnumexpr PLUS tnumexpr
+Rule 38    tnumexpr -> tnumexpr MINUS tnumexpr
+Rule 39    tnumexpr -> tnumexpr TIMES tnumexpr
+Rule 40    termlist -> term COMMA termlist
+Rule 41    termlist -> term
+Rule 42    term -> tnumexpr
+Rule 43    atom -> ID
+Rule 44    atom -> ID LPAREN termlist RPAREN
+Rule 45    initlist -> atom
+Rule 46    initlist -> atom COMMA initlist
+Rule 47    initlist -> atom EQ NUMBER
+Rule 48    initlist -> atom EQ NUMBER COMMA initlist
+Rule 49    effects -> effect
+Rule 50    effects -> effect effects
+Rule 51    effect -> atom SEMICOLON
+Rule 52    effect -> NOT atom SEMICOLON
+Rule 53    effect -> atom ASSIGN numexpr SEMICOLON
+Rule 54    paramlist -> param
+Rule 55    paramlist -> param COMMA paramlist
+Rule 56    param -> ID COLON setexpr
+Rule 57    statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE
+Rule 58    statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE
+
+Terminals, with rules where they appear
+
+AND                  : 14
+ASSIGN               : 53
+COLON                : 56
+COMMA                : 7 13 40 46 48 55
+EQ                   : 3 27 47 48
+EQVI                 : 17
+GEQ                  : 25
+GT                   : 23
+ID                   : 3 9 11 36 43 44 56 57 58
+IMPL                 : 16
+LBRACE               : 8 57 58
+LBRACK               : 7 23 24 25 26 27
+LEQ                  : 26
+LPAREN               : 22 28 34 44 57 58
+LT                   : 24
+MINUS                : 32 38
+NOT                  : 18 52
+NUMBER               : 7 7 12 29 35 47 48
+OR                   : 15
+PFALSE               : 20
+PLUS                 : 31 37
+PTRUE                : 19
+RBRACE               : 8 57 58
+RBRACK               : 7 23 24 25 26 27
+RPAREN               : 22 28 34 44 57 58
+SEMICOLON            : 3 4 5 6 51 52 53
+SOURCE               : 4
+SOURCEFORMULA        : 5
+TARGET               : 6
+TIMES                : 33 39
+TRANSITION           : 57 58
+TYPE                 : 3
+error                : 
+
+Nonterminals, with rules where they appear
+
+atom                 : 21 30 45 46 47 48 51 52 53
+boolexpr             : 5 6 14 14 15 15 16 16 17 17 18 22 57 58
+effect               : 49 50
+effects              : 50 57 58
+enum                 : 10 13
+initlist             : 4 46 48
+numexpr              : 23 23 24 24 25 25 26 26 27 27 28 31 31 32 32 33 33 34 53
+param                : 54 55
+paramlist            : 55 57
+setexpr              : 3 56
+spec                 : 2 0
+statement            : 1 2
+stringlist           : 8 13
+term                 : 40 41
+termlist             : 40 44
+tnumexpr             : 37 37 38 38 39 39 42
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . spec
+    (1) spec -> . statement
+    (2) spec -> . statement spec
+    (3) statement -> . TYPE ID EQ setexpr SEMICOLON
+    (4) statement -> . SOURCE initlist SEMICOLON
+    (5) statement -> . SOURCEFORMULA boolexpr SEMICOLON
+    (6) statement -> . TARGET boolexpr SEMICOLON
+    (57) statement -> . TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE
+    (58) statement -> . TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE
+
+    TYPE            shift and go to state 3
+    SOURCE          shift and go to state 4
+    SOURCEFORMULA   shift and go to state 5
+    TARGET          shift and go to state 6
+    TRANSITION      shift and go to state 7
+
+    spec                           shift and go to state 1
+    statement                      shift and go to state 2
+
+state 1
+
+    (0) S' -> spec .
+
+
+
+state 2
+
+    (1) spec -> statement .
+    (2) spec -> statement . spec
+    (1) spec -> . statement
+    (2) spec -> . statement spec
+    (3) statement -> . TYPE ID EQ setexpr SEMICOLON
+    (4) statement -> . SOURCE initlist SEMICOLON
+    (5) statement -> . SOURCEFORMULA boolexpr SEMICOLON
+    (6) statement -> . TARGET boolexpr SEMICOLON
+    (57) statement -> . TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE
+    (58) statement -> . TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE
+
+    $end            reduce using rule 1 (spec -> statement .)
+    TYPE            shift and go to state 3
+    SOURCE          shift and go to state 4
+    SOURCEFORMULA   shift and go to state 5
+    TARGET          shift and go to state 6
+    TRANSITION      shift and go to state 7
+
+    statement                      shift and go to state 2
+    spec                           shift and go to state 8
+
+state 3
+
+    (3) statement -> TYPE . ID EQ setexpr SEMICOLON
+
+    ID              shift and go to state 9
+
+
+state 4
+
+    (4) statement -> SOURCE . initlist SEMICOLON
+    (45) initlist -> . atom
+    (46) initlist -> . atom COMMA initlist
+    (47) initlist -> . atom EQ NUMBER
+    (48) initlist -> . atom EQ NUMBER COMMA initlist
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    ID              shift and go to state 12
+
+    initlist                       shift and go to state 10
+    atom                           shift and go to state 11
+
+state 5
+
+    (5) statement -> SOURCEFORMULA . boolexpr SEMICOLON
+    (14) boolexpr -> . boolexpr AND boolexpr
+    (15) boolexpr -> . boolexpr OR boolexpr
+    (16) boolexpr -> . boolexpr IMPL boolexpr
+    (17) boolexpr -> . boolexpr EQVI boolexpr
+    (18) boolexpr -> . NOT boolexpr
+    (19) boolexpr -> . PTRUE
+    (20) boolexpr -> . PFALSE
+    (21) boolexpr -> . atom
+    (22) boolexpr -> . LPAREN boolexpr RPAREN
+    (23) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (24) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (25) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (26) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (27) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 14
+    PTRUE           shift and go to state 15
+    PFALSE          shift and go to state 16
+    LPAREN          shift and go to state 18
+    LBRACK          shift and go to state 19
+    ID              shift and go to state 12
+
+    boolexpr                       shift and go to state 13
+    atom                           shift and go to state 17
+
+state 6
+
+    (6) statement -> TARGET . boolexpr SEMICOLON
+    (14) boolexpr -> . boolexpr AND boolexpr
+    (15) boolexpr -> . boolexpr OR boolexpr
+    (16) boolexpr -> . boolexpr IMPL boolexpr
+    (17) boolexpr -> . boolexpr EQVI boolexpr
+    (18) boolexpr -> . NOT boolexpr
+    (19) boolexpr -> . PTRUE
+    (20) boolexpr -> . PFALSE
+    (21) boolexpr -> . atom
+    (22) boolexpr -> . LPAREN boolexpr RPAREN
+    (23) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (24) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (25) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (26) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (27) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 14
+    PTRUE           shift and go to state 15
+    PFALSE          shift and go to state 16
+    LPAREN          shift and go to state 18
+    LBRACK          shift and go to state 19
+    ID              shift and go to state 12
+
+    boolexpr                       shift and go to state 20
+    atom                           shift and go to state 17
+
+state 7
+
+    (57) statement -> TRANSITION . ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE
+    (58) statement -> TRANSITION . ID LPAREN RPAREN boolexpr LBRACE effects RBRACE
+
+    ID              shift and go to state 21
+
+
+state 8
+
+    (2) spec -> statement spec .
+
+    $end            reduce using rule 2 (spec -> statement spec .)
+
+
+state 9
+
+    (3) statement -> TYPE ID . EQ setexpr SEMICOLON
+
+    EQ              shift and go to state 22
+
+
+state 10
+
+    (4) statement -> SOURCE initlist . SEMICOLON
+
+    SEMICOLON       shift and go to state 23
+
+
+state 11
+
+    (45) initlist -> atom .
+    (46) initlist -> atom . COMMA initlist
+    (47) initlist -> atom . EQ NUMBER
+    (48) initlist -> atom . EQ NUMBER COMMA initlist
+
+    SEMICOLON       reduce using rule 45 (initlist -> atom .)
+    COMMA           shift and go to state 24
+    EQ              shift and go to state 25
+
+
+state 12
+
+    (43) atom -> ID .
+    (44) atom -> ID . LPAREN termlist RPAREN
+
+    COMMA           reduce using rule 43 (atom -> ID .)
+    EQ              reduce using rule 43 (atom -> ID .)
+    SEMICOLON       reduce using rule 43 (atom -> ID .)
+    AND             reduce using rule 43 (atom -> ID .)
+    OR              reduce using rule 43 (atom -> ID .)
+    IMPL            reduce using rule 43 (atom -> ID .)
+    EQVI            reduce using rule 43 (atom -> ID .)
+    RPAREN          reduce using rule 43 (atom -> ID .)
+    LBRACE          reduce using rule 43 (atom -> ID .)
+    GT              reduce using rule 43 (atom -> ID .)
+    LT              reduce using rule 43 (atom -> ID .)
+    GEQ             reduce using rule 43 (atom -> ID .)
+    LEQ             reduce using rule 43 (atom -> ID .)
+    PLUS            reduce using rule 43 (atom -> ID .)
+    MINUS           reduce using rule 43 (atom -> ID .)
+    TIMES           reduce using rule 43 (atom -> ID .)
+    RBRACK          reduce using rule 43 (atom -> ID .)
+    ASSIGN          reduce using rule 43 (atom -> ID .)
+    LPAREN          shift and go to state 26
+
+
+state 13
+
+    (5) statement -> SOURCEFORMULA boolexpr . SEMICOLON
+    (14) boolexpr -> boolexpr . AND boolexpr
+    (15) boolexpr -> boolexpr . OR boolexpr
+    (16) boolexpr -> boolexpr . IMPL boolexpr
+    (17) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       shift and go to state 27
+    AND             shift and go to state 28
+    OR              shift and go to state 29
+    IMPL            shift and go to state 30
+    EQVI            shift and go to state 31
+
+
+state 14
+
+    (18) boolexpr -> NOT . boolexpr
+    (14) boolexpr -> . boolexpr AND boolexpr
+    (15) boolexpr -> . boolexpr OR boolexpr
+    (16) boolexpr -> . boolexpr IMPL boolexpr
+    (17) boolexpr -> . boolexpr EQVI boolexpr
+    (18) boolexpr -> . NOT boolexpr
+    (19) boolexpr -> . PTRUE
+    (20) boolexpr -> . PFALSE
+    (21) boolexpr -> . atom
+    (22) boolexpr -> . LPAREN boolexpr RPAREN
+    (23) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (24) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (25) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (26) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (27) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 14
+    PTRUE           shift and go to state 15
+    PFALSE          shift and go to state 16
+    LPAREN          shift and go to state 18
+    LBRACK          shift and go to state 19
+    ID              shift and go to state 12
+
+    boolexpr                       shift and go to state 32
+    atom                           shift and go to state 17
+
+state 15
+
+    (19) boolexpr -> PTRUE .
+
+    SEMICOLON       reduce using rule 19 (boolexpr -> PTRUE .)
+    AND             reduce using rule 19 (boolexpr -> PTRUE .)
+    OR              reduce using rule 19 (boolexpr -> PTRUE .)
+    IMPL            reduce using rule 19 (boolexpr -> PTRUE .)
+    EQVI            reduce using rule 19 (boolexpr -> PTRUE .)
+    RPAREN          reduce using rule 19 (boolexpr -> PTRUE .)
+    LBRACE          reduce using rule 19 (boolexpr -> PTRUE .)
+
+
+state 16
+
+    (20) boolexpr -> PFALSE .
+
+    SEMICOLON       reduce using rule 20 (boolexpr -> PFALSE .)
+    AND             reduce using rule 20 (boolexpr -> PFALSE .)
+    OR              reduce using rule 20 (boolexpr -> PFALSE .)
+    IMPL            reduce using rule 20 (boolexpr -> PFALSE .)
+    EQVI            reduce using rule 20 (boolexpr -> PFALSE .)
+    RPAREN          reduce using rule 20 (boolexpr -> PFALSE .)
+    LBRACE          reduce using rule 20 (boolexpr -> PFALSE .)
+
+
+state 17
+
+    (21) boolexpr -> atom .
+
+    SEMICOLON       reduce using rule 21 (boolexpr -> atom .)
+    AND             reduce using rule 21 (boolexpr -> atom .)
+    OR              reduce using rule 21 (boolexpr -> atom .)
+    IMPL            reduce using rule 21 (boolexpr -> atom .)
+    EQVI            reduce using rule 21 (boolexpr -> atom .)
+    RPAREN          reduce using rule 21 (boolexpr -> atom .)
+    LBRACE          reduce using rule 21 (boolexpr -> atom .)
+
+
+state 18
+
+    (22) boolexpr -> LPAREN . boolexpr RPAREN
+    (14) boolexpr -> . boolexpr AND boolexpr
+    (15) boolexpr -> . boolexpr OR boolexpr
+    (16) boolexpr -> . boolexpr IMPL boolexpr
+    (17) boolexpr -> . boolexpr EQVI boolexpr
+    (18) boolexpr -> . NOT boolexpr
+    (19) boolexpr -> . PTRUE
+    (20) boolexpr -> . PFALSE
+    (21) boolexpr -> . atom
+    (22) boolexpr -> . LPAREN boolexpr RPAREN
+    (23) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (24) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (25) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (26) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (27) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 14
+    PTRUE           shift and go to state 15
+    PFALSE          shift and go to state 16
+    LPAREN          shift and go to state 18
+    LBRACK          shift and go to state 19
+    ID              shift and go to state 12
+
+    boolexpr                       shift and go to state 33
+    atom                           shift and go to state 17
+
+state 19
+
+    (23) boolexpr -> LBRACK . numexpr GT numexpr RBRACK
+    (24) boolexpr -> LBRACK . numexpr LT numexpr RBRACK
+    (25) boolexpr -> LBRACK . numexpr GEQ numexpr RBRACK
+    (26) boolexpr -> LBRACK . numexpr LEQ numexpr RBRACK
+    (27) boolexpr -> LBRACK . numexpr EQ numexpr RBRACK
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    numexpr                        shift and go to state 34
+    atom                           shift and go to state 37
+
+state 20
+
+    (6) statement -> TARGET boolexpr . SEMICOLON
+    (14) boolexpr -> boolexpr . AND boolexpr
+    (15) boolexpr -> boolexpr . OR boolexpr
+    (16) boolexpr -> boolexpr . IMPL boolexpr
+    (17) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       shift and go to state 38
+    AND             shift and go to state 28
+    OR              shift and go to state 29
+    IMPL            shift and go to state 30
+    EQVI            shift and go to state 31
+
+
+state 21
+
+    (57) statement -> TRANSITION ID . LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE
+    (58) statement -> TRANSITION ID . LPAREN RPAREN boolexpr LBRACE effects RBRACE
+
+    LPAREN          shift and go to state 39
+
+
+state 22
+
+    (3) statement -> TYPE ID EQ . setexpr SEMICOLON
+    (7) setexpr -> . LBRACK NUMBER COMMA NUMBER RBRACK
+    (8) setexpr -> . LBRACE stringlist RBRACE
+    (9) setexpr -> . ID
+
+    LBRACK          shift and go to state 42
+    LBRACE          shift and go to state 43
+    ID              shift and go to state 40
+
+    setexpr                        shift and go to state 41
+
+state 23
+
+    (4) statement -> SOURCE initlist SEMICOLON .
+
+    TYPE            reduce using rule 4 (statement -> SOURCE initlist SEMICOLON .)
+    SOURCE          reduce using rule 4 (statement -> SOURCE initlist SEMICOLON .)
+    SOURCEFORMULA   reduce using rule 4 (statement -> SOURCE initlist SEMICOLON .)
+    TARGET          reduce using rule 4 (statement -> SOURCE initlist SEMICOLON .)
+    TRANSITION      reduce using rule 4 (statement -> SOURCE initlist SEMICOLON .)
+    $end            reduce using rule 4 (statement -> SOURCE initlist SEMICOLON .)
+
+
+state 24
+
+    (46) initlist -> atom COMMA . initlist
+    (45) initlist -> . atom
+    (46) initlist -> . atom COMMA initlist
+    (47) initlist -> . atom EQ NUMBER
+    (48) initlist -> . atom EQ NUMBER COMMA initlist
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    ID              shift and go to state 12
+
+    atom                           shift and go to state 11
+    initlist                       shift and go to state 44
+
+state 25
+
+    (47) initlist -> atom EQ . NUMBER
+    (48) initlist -> atom EQ . NUMBER COMMA initlist
+
+    NUMBER          shift and go to state 45
+
+
+state 26
+
+    (44) atom -> ID LPAREN . termlist RPAREN
+    (40) termlist -> . term COMMA termlist
+    (41) termlist -> . term
+    (42) term -> . tnumexpr
+    (34) tnumexpr -> . LPAREN numexpr RPAREN
+    (35) tnumexpr -> . NUMBER
+    (36) tnumexpr -> . ID
+    (37) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (38) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (39) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 47
+    NUMBER          shift and go to state 51
+    ID              shift and go to state 46
+
+    termlist                       shift and go to state 48
+    term                           shift and go to state 49
+    tnumexpr                       shift and go to state 50
+
+state 27
+
+    (5) statement -> SOURCEFORMULA boolexpr SEMICOLON .
+
+    TYPE            reduce using rule 5 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+    SOURCE          reduce using rule 5 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+    SOURCEFORMULA   reduce using rule 5 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+    TARGET          reduce using rule 5 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+    TRANSITION      reduce using rule 5 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+    $end            reduce using rule 5 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+
+
+state 28
+
+    (14) boolexpr -> boolexpr AND . boolexpr
+    (14) boolexpr -> . boolexpr AND boolexpr
+    (15) boolexpr -> . boolexpr OR boolexpr
+    (16) boolexpr -> . boolexpr IMPL boolexpr
+    (17) boolexpr -> . boolexpr EQVI boolexpr
+    (18) boolexpr -> . NOT boolexpr
+    (19) boolexpr -> . PTRUE
+    (20) boolexpr -> . PFALSE
+    (21) boolexpr -> . atom
+    (22) boolexpr -> . LPAREN boolexpr RPAREN
+    (23) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (24) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (25) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (26) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (27) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 14
+    PTRUE           shift and go to state 15
+    PFALSE          shift and go to state 16
+    LPAREN          shift and go to state 18
+    LBRACK          shift and go to state 19
+    ID              shift and go to state 12
+
+    boolexpr                       shift and go to state 52
+    atom                           shift and go to state 17
+
+state 29
+
+    (15) boolexpr -> boolexpr OR . boolexpr
+    (14) boolexpr -> . boolexpr AND boolexpr
+    (15) boolexpr -> . boolexpr OR boolexpr
+    (16) boolexpr -> . boolexpr IMPL boolexpr
+    (17) boolexpr -> . boolexpr EQVI boolexpr
+    (18) boolexpr -> . NOT boolexpr
+    (19) boolexpr -> . PTRUE
+    (20) boolexpr -> . PFALSE
+    (21) boolexpr -> . atom
+    (22) boolexpr -> . LPAREN boolexpr RPAREN
+    (23) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (24) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (25) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (26) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (27) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 14
+    PTRUE           shift and go to state 15
+    PFALSE          shift and go to state 16
+    LPAREN          shift and go to state 18
+    LBRACK          shift and go to state 19
+    ID              shift and go to state 12
+
+    boolexpr                       shift and go to state 53
+    atom                           shift and go to state 17
+
+state 30
+
+    (16) boolexpr -> boolexpr IMPL . boolexpr
+    (14) boolexpr -> . boolexpr AND boolexpr
+    (15) boolexpr -> . boolexpr OR boolexpr
+    (16) boolexpr -> . boolexpr IMPL boolexpr
+    (17) boolexpr -> . boolexpr EQVI boolexpr
+    (18) boolexpr -> . NOT boolexpr
+    (19) boolexpr -> . PTRUE
+    (20) boolexpr -> . PFALSE
+    (21) boolexpr -> . atom
+    (22) boolexpr -> . LPAREN boolexpr RPAREN
+    (23) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (24) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (25) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (26) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (27) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 14
+    PTRUE           shift and go to state 15
+    PFALSE          shift and go to state 16
+    LPAREN          shift and go to state 18
+    LBRACK          shift and go to state 19
+    ID              shift and go to state 12
+
+    boolexpr                       shift and go to state 54
+    atom                           shift and go to state 17
+
+state 31
+
+    (17) boolexpr -> boolexpr EQVI . boolexpr
+    (14) boolexpr -> . boolexpr AND boolexpr
+    (15) boolexpr -> . boolexpr OR boolexpr
+    (16) boolexpr -> . boolexpr IMPL boolexpr
+    (17) boolexpr -> . boolexpr EQVI boolexpr
+    (18) boolexpr -> . NOT boolexpr
+    (19) boolexpr -> . PTRUE
+    (20) boolexpr -> . PFALSE
+    (21) boolexpr -> . atom
+    (22) boolexpr -> . LPAREN boolexpr RPAREN
+    (23) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (24) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (25) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (26) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (27) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 14
+    PTRUE           shift and go to state 15
+    PFALSE          shift and go to state 16
+    LPAREN          shift and go to state 18
+    LBRACK          shift and go to state 19
+    ID              shift and go to state 12
+
+    boolexpr                       shift and go to state 55
+    atom                           shift and go to state 17
+
+state 32
+
+    (18) boolexpr -> NOT boolexpr .
+    (14) boolexpr -> boolexpr . AND boolexpr
+    (15) boolexpr -> boolexpr . OR boolexpr
+    (16) boolexpr -> boolexpr . IMPL boolexpr
+    (17) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 18 (boolexpr -> NOT boolexpr .)
+    AND             reduce using rule 18 (boolexpr -> NOT boolexpr .)
+    OR              reduce using rule 18 (boolexpr -> NOT boolexpr .)
+    IMPL            reduce using rule 18 (boolexpr -> NOT boolexpr .)
+    EQVI            reduce using rule 18 (boolexpr -> NOT boolexpr .)
+    RPAREN          reduce using rule 18 (boolexpr -> NOT boolexpr .)
+    LBRACE          reduce using rule 18 (boolexpr -> NOT boolexpr .)
+
+  ! AND             [ shift and go to state 28 ]
+  ! OR              [ shift and go to state 29 ]
+  ! IMPL            [ shift and go to state 30 ]
+  ! EQVI            [ shift and go to state 31 ]
+
+
+state 33
+
+    (22) boolexpr -> LPAREN boolexpr . RPAREN
+    (14) boolexpr -> boolexpr . AND boolexpr
+    (15) boolexpr -> boolexpr . OR boolexpr
+    (16) boolexpr -> boolexpr . IMPL boolexpr
+    (17) boolexpr -> boolexpr . EQVI boolexpr
+
+    RPAREN          shift and go to state 56
+    AND             shift and go to state 28
+    OR              shift and go to state 29
+    IMPL            shift and go to state 30
+    EQVI            shift and go to state 31
+
+
+state 34
+
+    (23) boolexpr -> LBRACK numexpr . GT numexpr RBRACK
+    (24) boolexpr -> LBRACK numexpr . LT numexpr RBRACK
+    (25) boolexpr -> LBRACK numexpr . GEQ numexpr RBRACK
+    (26) boolexpr -> LBRACK numexpr . LEQ numexpr RBRACK
+    (27) boolexpr -> LBRACK numexpr . EQ numexpr RBRACK
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    GT              shift and go to state 57
+    LT              shift and go to state 58
+    GEQ             shift and go to state 59
+    LEQ             shift and go to state 60
+    EQ              shift and go to state 61
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    TIMES           shift and go to state 64
+
+
+state 35
+
+    (28) numexpr -> LPAREN . numexpr RPAREN
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    numexpr                        shift and go to state 65
+    atom                           shift and go to state 37
+
+state 36
+
+    (29) numexpr -> NUMBER .
+
+    GT              reduce using rule 29 (numexpr -> NUMBER .)
+    LT              reduce using rule 29 (numexpr -> NUMBER .)
+    GEQ             reduce using rule 29 (numexpr -> NUMBER .)
+    LEQ             reduce using rule 29 (numexpr -> NUMBER .)
+    EQ              reduce using rule 29 (numexpr -> NUMBER .)
+    PLUS            reduce using rule 29 (numexpr -> NUMBER .)
+    MINUS           reduce using rule 29 (numexpr -> NUMBER .)
+    TIMES           reduce using rule 29 (numexpr -> NUMBER .)
+    RPAREN          reduce using rule 29 (numexpr -> NUMBER .)
+    RBRACK          reduce using rule 29 (numexpr -> NUMBER .)
+    SEMICOLON       reduce using rule 29 (numexpr -> NUMBER .)
+
+
+state 37
+
+    (30) numexpr -> atom .
+
+    GT              reduce using rule 30 (numexpr -> atom .)
+    LT              reduce using rule 30 (numexpr -> atom .)
+    GEQ             reduce using rule 30 (numexpr -> atom .)
+    LEQ             reduce using rule 30 (numexpr -> atom .)
+    EQ              reduce using rule 30 (numexpr -> atom .)
+    PLUS            reduce using rule 30 (numexpr -> atom .)
+    MINUS           reduce using rule 30 (numexpr -> atom .)
+    TIMES           reduce using rule 30 (numexpr -> atom .)
+    RPAREN          reduce using rule 30 (numexpr -> atom .)
+    RBRACK          reduce using rule 30 (numexpr -> atom .)
+    SEMICOLON       reduce using rule 30 (numexpr -> atom .)
+
+
+state 38
+
+    (6) statement -> TARGET boolexpr SEMICOLON .
+
+    TYPE            reduce using rule 6 (statement -> TARGET boolexpr SEMICOLON .)
+    SOURCE          reduce using rule 6 (statement -> TARGET boolexpr SEMICOLON .)
+    SOURCEFORMULA   reduce using rule 6 (statement -> TARGET boolexpr SEMICOLON .)
+    TARGET          reduce using rule 6 (statement -> TARGET boolexpr SEMICOLON .)
+    TRANSITION      reduce using rule 6 (statement -> TARGET boolexpr SEMICOLON .)
+    $end            reduce using rule 6 (statement -> TARGET boolexpr SEMICOLON .)
+
+
+state 39
+
+    (57) statement -> TRANSITION ID LPAREN . paramlist RPAREN boolexpr LBRACE effects RBRACE
+    (58) statement -> TRANSITION ID LPAREN . RPAREN boolexpr LBRACE effects RBRACE
+    (54) paramlist -> . param
+    (55) paramlist -> . param COMMA paramlist
+    (56) param -> . ID COLON setexpr
+
+    RPAREN          shift and go to state 68
+    ID              shift and go to state 66
+
+    paramlist                      shift and go to state 67
+    param                          shift and go to state 69
+
+state 40
+
+    (9) setexpr -> ID .
+
+    SEMICOLON       reduce using rule 9 (setexpr -> ID .)
+    COMMA           reduce using rule 9 (setexpr -> ID .)
+    RPAREN          reduce using rule 9 (setexpr -> ID .)
+
+
+state 41
+
+    (3) statement -> TYPE ID EQ setexpr . SEMICOLON
+
+    SEMICOLON       shift and go to state 70
+
+
+state 42
+
+    (7) setexpr -> LBRACK . NUMBER COMMA NUMBER RBRACK
+
+    NUMBER          shift and go to state 71
+
+
+state 43
+
+    (8) setexpr -> LBRACE . stringlist RBRACE
+    (10) stringlist -> . enum
+    (13) stringlist -> . enum COMMA stringlist
+    (11) enum -> . ID
+    (12) enum -> . NUMBER
+
+    ID              shift and go to state 74
+    NUMBER          shift and go to state 75
+
+    stringlist                     shift and go to state 72
+    enum                           shift and go to state 73
+
+state 44
+
+    (46) initlist -> atom COMMA initlist .
+
+    SEMICOLON       reduce using rule 46 (initlist -> atom COMMA initlist .)
+
+
+state 45
+
+    (47) initlist -> atom EQ NUMBER .
+    (48) initlist -> atom EQ NUMBER . COMMA initlist
+
+    SEMICOLON       reduce using rule 47 (initlist -> atom EQ NUMBER .)
+    COMMA           shift and go to state 76
+
+
+state 46
+
+    (36) tnumexpr -> ID .
+
+    PLUS            reduce using rule 36 (tnumexpr -> ID .)
+    MINUS           reduce using rule 36 (tnumexpr -> ID .)
+    TIMES           reduce using rule 36 (tnumexpr -> ID .)
+    COMMA           reduce using rule 36 (tnumexpr -> ID .)
+    RPAREN          reduce using rule 36 (tnumexpr -> ID .)
+
+
+state 47
+
+    (34) tnumexpr -> LPAREN . numexpr RPAREN
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    numexpr                        shift and go to state 77
+    atom                           shift and go to state 37
+
+state 48
+
+    (44) atom -> ID LPAREN termlist . RPAREN
+
+    RPAREN          shift and go to state 78
+
+
+state 49
+
+    (40) termlist -> term . COMMA termlist
+    (41) termlist -> term .
+
+    COMMA           shift and go to state 79
+    RPAREN          reduce using rule 41 (termlist -> term .)
+
+
+state 50
+
+    (42) term -> tnumexpr .
+    (37) tnumexpr -> tnumexpr . PLUS tnumexpr
+    (38) tnumexpr -> tnumexpr . MINUS tnumexpr
+    (39) tnumexpr -> tnumexpr . TIMES tnumexpr
+
+    COMMA           reduce using rule 42 (term -> tnumexpr .)
+    RPAREN          reduce using rule 42 (term -> tnumexpr .)
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    TIMES           shift and go to state 82
+
+
+state 51
+
+    (35) tnumexpr -> NUMBER .
+
+    PLUS            reduce using rule 35 (tnumexpr -> NUMBER .)
+    MINUS           reduce using rule 35 (tnumexpr -> NUMBER .)
+    TIMES           reduce using rule 35 (tnumexpr -> NUMBER .)
+    COMMA           reduce using rule 35 (tnumexpr -> NUMBER .)
+    RPAREN          reduce using rule 35 (tnumexpr -> NUMBER .)
+
+
+state 52
+
+    (14) boolexpr -> boolexpr AND boolexpr .
+    (14) boolexpr -> boolexpr . AND boolexpr
+    (15) boolexpr -> boolexpr . OR boolexpr
+    (16) boolexpr -> boolexpr . IMPL boolexpr
+    (17) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 14 (boolexpr -> boolexpr AND boolexpr .)
+    AND             reduce using rule 14 (boolexpr -> boolexpr AND boolexpr .)
+    OR              reduce using rule 14 (boolexpr -> boolexpr AND boolexpr .)
+    IMPL            reduce using rule 14 (boolexpr -> boolexpr AND boolexpr .)
+    EQVI            reduce using rule 14 (boolexpr -> boolexpr AND boolexpr .)
+    RPAREN          reduce using rule 14 (boolexpr -> boolexpr AND boolexpr .)
+    LBRACE          reduce using rule 14 (boolexpr -> boolexpr AND boolexpr .)
+
+  ! AND             [ shift and go to state 28 ]
+  ! OR              [ shift and go to state 29 ]
+  ! IMPL            [ shift and go to state 30 ]
+  ! EQVI            [ shift and go to state 31 ]
+
+
+state 53
+
+    (15) boolexpr -> boolexpr OR boolexpr .
+    (14) boolexpr -> boolexpr . AND boolexpr
+    (15) boolexpr -> boolexpr . OR boolexpr
+    (16) boolexpr -> boolexpr . IMPL boolexpr
+    (17) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 15 (boolexpr -> boolexpr OR boolexpr .)
+    AND             reduce using rule 15 (boolexpr -> boolexpr OR boolexpr .)
+    OR              reduce using rule 15 (boolexpr -> boolexpr OR boolexpr .)
+    IMPL            reduce using rule 15 (boolexpr -> boolexpr OR boolexpr .)
+    EQVI            reduce using rule 15 (boolexpr -> boolexpr OR boolexpr .)
+    RPAREN          reduce using rule 15 (boolexpr -> boolexpr OR boolexpr .)
+    LBRACE          reduce using rule 15 (boolexpr -> boolexpr OR boolexpr .)
+
+  ! AND             [ shift and go to state 28 ]
+  ! OR              [ shift and go to state 29 ]
+  ! IMPL            [ shift and go to state 30 ]
+  ! EQVI            [ shift and go to state 31 ]
+
+
+state 54
+
+    (16) boolexpr -> boolexpr IMPL boolexpr .
+    (14) boolexpr -> boolexpr . AND boolexpr
+    (15) boolexpr -> boolexpr . OR boolexpr
+    (16) boolexpr -> boolexpr . IMPL boolexpr
+    (17) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 16 (boolexpr -> boolexpr IMPL boolexpr .)
+    EQVI            reduce using rule 16 (boolexpr -> boolexpr IMPL boolexpr .)
+    RPAREN          reduce using rule 16 (boolexpr -> boolexpr IMPL boolexpr .)
+    LBRACE          reduce using rule 16 (boolexpr -> boolexpr IMPL boolexpr .)
+    AND             shift and go to state 28
+    OR              shift and go to state 29
+    IMPL            shift and go to state 30
+
+  ! AND             [ reduce using rule 16 (boolexpr -> boolexpr IMPL boolexpr .) ]
+  ! OR              [ reduce using rule 16 (boolexpr -> boolexpr IMPL boolexpr .) ]
+  ! IMPL            [ reduce using rule 16 (boolexpr -> boolexpr IMPL boolexpr .) ]
+  ! EQVI            [ shift and go to state 31 ]
+
+
+state 55
+
+    (17) boolexpr -> boolexpr EQVI boolexpr .
+    (14) boolexpr -> boolexpr . AND boolexpr
+    (15) boolexpr -> boolexpr . OR boolexpr
+    (16) boolexpr -> boolexpr . IMPL boolexpr
+    (17) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 17 (boolexpr -> boolexpr EQVI boolexpr .)
+    RPAREN          reduce using rule 17 (boolexpr -> boolexpr EQVI boolexpr .)
+    LBRACE          reduce using rule 17 (boolexpr -> boolexpr EQVI boolexpr .)
+    AND             shift and go to state 28
+    OR              shift and go to state 29
+    IMPL            shift and go to state 30
+    EQVI            shift and go to state 31
+
+  ! AND             [ reduce using rule 17 (boolexpr -> boolexpr EQVI boolexpr .) ]
+  ! OR              [ reduce using rule 17 (boolexpr -> boolexpr EQVI boolexpr .) ]
+  ! IMPL            [ reduce using rule 17 (boolexpr -> boolexpr EQVI boolexpr .) ]
+  ! EQVI            [ reduce using rule 17 (boolexpr -> boolexpr EQVI boolexpr .) ]
+
+
+state 56
+
+    (22) boolexpr -> LPAREN boolexpr RPAREN .
+
+    SEMICOLON       reduce using rule 22 (boolexpr -> LPAREN boolexpr RPAREN .)
+    AND             reduce using rule 22 (boolexpr -> LPAREN boolexpr RPAREN .)
+    OR              reduce using rule 22 (boolexpr -> LPAREN boolexpr RPAREN .)
+    IMPL            reduce using rule 22 (boolexpr -> LPAREN boolexpr RPAREN .)
+    EQVI            reduce using rule 22 (boolexpr -> LPAREN boolexpr RPAREN .)
+    RPAREN          reduce using rule 22 (boolexpr -> LPAREN boolexpr RPAREN .)
+    LBRACE          reduce using rule 22 (boolexpr -> LPAREN boolexpr RPAREN .)
+
+
+state 57
+
+    (23) boolexpr -> LBRACK numexpr GT . numexpr RBRACK
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    numexpr                        shift and go to state 83
+    atom                           shift and go to state 37
+
+state 58
+
+    (24) boolexpr -> LBRACK numexpr LT . numexpr RBRACK
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    numexpr                        shift and go to state 84
+    atom                           shift and go to state 37
+
+state 59
+
+    (25) boolexpr -> LBRACK numexpr GEQ . numexpr RBRACK
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    numexpr                        shift and go to state 85
+    atom                           shift and go to state 37
+
+state 60
+
+    (26) boolexpr -> LBRACK numexpr LEQ . numexpr RBRACK
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    numexpr                        shift and go to state 86
+    atom                           shift and go to state 37
+
+state 61
+
+    (27) boolexpr -> LBRACK numexpr EQ . numexpr RBRACK
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    numexpr                        shift and go to state 87
+    atom                           shift and go to state 37
+
+state 62
+
+    (31) numexpr -> numexpr PLUS . numexpr
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    numexpr                        shift and go to state 88
+    atom                           shift and go to state 37
+
+state 63
+
+    (32) numexpr -> numexpr MINUS . numexpr
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    numexpr                        shift and go to state 89
+    atom                           shift and go to state 37
+
+state 64
+
+    (33) numexpr -> numexpr TIMES . numexpr
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    numexpr                        shift and go to state 90
+    atom                           shift and go to state 37
+
+state 65
+
+    (28) numexpr -> LPAREN numexpr . RPAREN
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    RPAREN          shift and go to state 91
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    TIMES           shift and go to state 64
+
+
+state 66
+
+    (56) param -> ID . COLON setexpr
+
+    COLON           shift and go to state 92
+
+
+state 67
+
+    (57) statement -> TRANSITION ID LPAREN paramlist . RPAREN boolexpr LBRACE effects RBRACE
+
+    RPAREN          shift and go to state 93
+
+
+state 68
+
+    (58) statement -> TRANSITION ID LPAREN RPAREN . boolexpr LBRACE effects RBRACE
+    (14) boolexpr -> . boolexpr AND boolexpr
+    (15) boolexpr -> . boolexpr OR boolexpr
+    (16) boolexpr -> . boolexpr IMPL boolexpr
+    (17) boolexpr -> . boolexpr EQVI boolexpr
+    (18) boolexpr -> . NOT boolexpr
+    (19) boolexpr -> . PTRUE
+    (20) boolexpr -> . PFALSE
+    (21) boolexpr -> . atom
+    (22) boolexpr -> . LPAREN boolexpr RPAREN
+    (23) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (24) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (25) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (26) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (27) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 14
+    PTRUE           shift and go to state 15
+    PFALSE          shift and go to state 16
+    LPAREN          shift and go to state 18
+    LBRACK          shift and go to state 19
+    ID              shift and go to state 12
+
+    boolexpr                       shift and go to state 94
+    atom                           shift and go to state 17
+
+state 69
+
+    (54) paramlist -> param .
+    (55) paramlist -> param . COMMA paramlist
+
+    RPAREN          reduce using rule 54 (paramlist -> param .)
+    COMMA           shift and go to state 95
+
+
+state 70
+
+    (3) statement -> TYPE ID EQ setexpr SEMICOLON .
+
+    TYPE            reduce using rule 3 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+    SOURCE          reduce using rule 3 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+    SOURCEFORMULA   reduce using rule 3 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+    TARGET          reduce using rule 3 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+    TRANSITION      reduce using rule 3 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+    $end            reduce using rule 3 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+
+
+state 71
+
+    (7) setexpr -> LBRACK NUMBER . COMMA NUMBER RBRACK
+
+    COMMA           shift and go to state 96
+
+
+state 72
+
+    (8) setexpr -> LBRACE stringlist . RBRACE
+
+    RBRACE          shift and go to state 97
+
+
+state 73
+
+    (10) stringlist -> enum .
+    (13) stringlist -> enum . COMMA stringlist
+
+    RBRACE          reduce using rule 10 (stringlist -> enum .)
+    COMMA           shift and go to state 98
+
+
+state 74
+
+    (11) enum -> ID .
+
+    COMMA           reduce using rule 11 (enum -> ID .)
+    RBRACE          reduce using rule 11 (enum -> ID .)
+
+
+state 75
+
+    (12) enum -> NUMBER .
+
+    COMMA           reduce using rule 12 (enum -> NUMBER .)
+    RBRACE          reduce using rule 12 (enum -> NUMBER .)
+
+
+state 76
+
+    (48) initlist -> atom EQ NUMBER COMMA . initlist
+    (45) initlist -> . atom
+    (46) initlist -> . atom COMMA initlist
+    (47) initlist -> . atom EQ NUMBER
+    (48) initlist -> . atom EQ NUMBER COMMA initlist
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    ID              shift and go to state 12
+
+    atom                           shift and go to state 11
+    initlist                       shift and go to state 99
+
+state 77
+
+    (34) tnumexpr -> LPAREN numexpr . RPAREN
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    RPAREN          shift and go to state 100
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    TIMES           shift and go to state 64
+
+
+state 78
+
+    (44) atom -> ID LPAREN termlist RPAREN .
+
+    COMMA           reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    EQ              reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    SEMICOLON       reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    AND             reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    OR              reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    IMPL            reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    EQVI            reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    RPAREN          reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    LBRACE          reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    GT              reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    LT              reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    GEQ             reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    LEQ             reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    PLUS            reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    MINUS           reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    TIMES           reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    RBRACK          reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+    ASSIGN          reduce using rule 44 (atom -> ID LPAREN termlist RPAREN .)
+
+
+state 79
+
+    (40) termlist -> term COMMA . termlist
+    (40) termlist -> . term COMMA termlist
+    (41) termlist -> . term
+    (42) term -> . tnumexpr
+    (34) tnumexpr -> . LPAREN numexpr RPAREN
+    (35) tnumexpr -> . NUMBER
+    (36) tnumexpr -> . ID
+    (37) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (38) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (39) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 47
+    NUMBER          shift and go to state 51
+    ID              shift and go to state 46
+
+    term                           shift and go to state 49
+    termlist                       shift and go to state 101
+    tnumexpr                       shift and go to state 50
+
+state 80
+
+    (37) tnumexpr -> tnumexpr PLUS . tnumexpr
+    (34) tnumexpr -> . LPAREN numexpr RPAREN
+    (35) tnumexpr -> . NUMBER
+    (36) tnumexpr -> . ID
+    (37) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (38) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (39) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 47
+    NUMBER          shift and go to state 51
+    ID              shift and go to state 46
+
+    tnumexpr                       shift and go to state 102
+
+state 81
+
+    (38) tnumexpr -> tnumexpr MINUS . tnumexpr
+    (34) tnumexpr -> . LPAREN numexpr RPAREN
+    (35) tnumexpr -> . NUMBER
+    (36) tnumexpr -> . ID
+    (37) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (38) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (39) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 47
+    NUMBER          shift and go to state 51
+    ID              shift and go to state 46
+
+    tnumexpr                       shift and go to state 103
+
+state 82
+
+    (39) tnumexpr -> tnumexpr TIMES . tnumexpr
+    (34) tnumexpr -> . LPAREN numexpr RPAREN
+    (35) tnumexpr -> . NUMBER
+    (36) tnumexpr -> . ID
+    (37) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (38) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (39) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 47
+    NUMBER          shift and go to state 51
+    ID              shift and go to state 46
+
+    tnumexpr                       shift and go to state 104
+
+state 83
+
+    (23) boolexpr -> LBRACK numexpr GT numexpr . RBRACK
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    RBRACK          shift and go to state 105
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    TIMES           shift and go to state 64
+
+
+state 84
+
+    (24) boolexpr -> LBRACK numexpr LT numexpr . RBRACK
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    RBRACK          shift and go to state 106
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    TIMES           shift and go to state 64
+
+
+state 85
+
+    (25) boolexpr -> LBRACK numexpr GEQ numexpr . RBRACK
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    RBRACK          shift and go to state 107
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    TIMES           shift and go to state 64
+
+
+state 86
+
+    (26) boolexpr -> LBRACK numexpr LEQ numexpr . RBRACK
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    RBRACK          shift and go to state 108
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    TIMES           shift and go to state 64
+
+
+state 87
+
+    (27) boolexpr -> LBRACK numexpr EQ numexpr . RBRACK
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    RBRACK          shift and go to state 109
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    TIMES           shift and go to state 64
+
+
+state 88
+
+    (31) numexpr -> numexpr PLUS numexpr .
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    GT              reduce using rule 31 (numexpr -> numexpr PLUS numexpr .)
+    LT              reduce using rule 31 (numexpr -> numexpr PLUS numexpr .)
+    GEQ             reduce using rule 31 (numexpr -> numexpr PLUS numexpr .)
+    LEQ             reduce using rule 31 (numexpr -> numexpr PLUS numexpr .)
+    EQ              reduce using rule 31 (numexpr -> numexpr PLUS numexpr .)
+    PLUS            reduce using rule 31 (numexpr -> numexpr PLUS numexpr .)
+    MINUS           reduce using rule 31 (numexpr -> numexpr PLUS numexpr .)
+    RPAREN          reduce using rule 31 (numexpr -> numexpr PLUS numexpr .)
+    RBRACK          reduce using rule 31 (numexpr -> numexpr PLUS numexpr .)
+    SEMICOLON       reduce using rule 31 (numexpr -> numexpr PLUS numexpr .)
+    TIMES           shift and go to state 64
+
+  ! TIMES           [ reduce using rule 31 (numexpr -> numexpr PLUS numexpr .) ]
+  ! PLUS            [ shift and go to state 62 ]
+  ! MINUS           [ shift and go to state 63 ]
+
+
+state 89
+
+    (32) numexpr -> numexpr MINUS numexpr .
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    GT              reduce using rule 32 (numexpr -> numexpr MINUS numexpr .)
+    LT              reduce using rule 32 (numexpr -> numexpr MINUS numexpr .)
+    GEQ             reduce using rule 32 (numexpr -> numexpr MINUS numexpr .)
+    LEQ             reduce using rule 32 (numexpr -> numexpr MINUS numexpr .)
+    EQ              reduce using rule 32 (numexpr -> numexpr MINUS numexpr .)
+    PLUS            reduce using rule 32 (numexpr -> numexpr MINUS numexpr .)
+    MINUS           reduce using rule 32 (numexpr -> numexpr MINUS numexpr .)
+    RPAREN          reduce using rule 32 (numexpr -> numexpr MINUS numexpr .)
+    RBRACK          reduce using rule 32 (numexpr -> numexpr MINUS numexpr .)
+    SEMICOLON       reduce using rule 32 (numexpr -> numexpr MINUS numexpr .)
+    TIMES           shift and go to state 64
+
+  ! TIMES           [ reduce using rule 32 (numexpr -> numexpr MINUS numexpr .) ]
+  ! PLUS            [ shift and go to state 62 ]
+  ! MINUS           [ shift and go to state 63 ]
+
+
+state 90
+
+    (33) numexpr -> numexpr TIMES numexpr .
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    GT              reduce using rule 33 (numexpr -> numexpr TIMES numexpr .)
+    LT              reduce using rule 33 (numexpr -> numexpr TIMES numexpr .)
+    GEQ             reduce using rule 33 (numexpr -> numexpr TIMES numexpr .)
+    LEQ             reduce using rule 33 (numexpr -> numexpr TIMES numexpr .)
+    EQ              reduce using rule 33 (numexpr -> numexpr TIMES numexpr .)
+    PLUS            reduce using rule 33 (numexpr -> numexpr TIMES numexpr .)
+    MINUS           reduce using rule 33 (numexpr -> numexpr TIMES numexpr .)
+    TIMES           reduce using rule 33 (numexpr -> numexpr TIMES numexpr .)
+    RPAREN          reduce using rule 33 (numexpr -> numexpr TIMES numexpr .)
+    RBRACK          reduce using rule 33 (numexpr -> numexpr TIMES numexpr .)
+    SEMICOLON       reduce using rule 33 (numexpr -> numexpr TIMES numexpr .)
+
+  ! PLUS            [ shift and go to state 62 ]
+  ! MINUS           [ shift and go to state 63 ]
+  ! TIMES           [ shift and go to state 64 ]
+
+
+state 91
+
+    (28) numexpr -> LPAREN numexpr RPAREN .
+
+    GT              reduce using rule 28 (numexpr -> LPAREN numexpr RPAREN .)
+    LT              reduce using rule 28 (numexpr -> LPAREN numexpr RPAREN .)
+    GEQ             reduce using rule 28 (numexpr -> LPAREN numexpr RPAREN .)
+    LEQ             reduce using rule 28 (numexpr -> LPAREN numexpr RPAREN .)
+    EQ              reduce using rule 28 (numexpr -> LPAREN numexpr RPAREN .)
+    PLUS            reduce using rule 28 (numexpr -> LPAREN numexpr RPAREN .)
+    MINUS           reduce using rule 28 (numexpr -> LPAREN numexpr RPAREN .)
+    TIMES           reduce using rule 28 (numexpr -> LPAREN numexpr RPAREN .)
+    RPAREN          reduce using rule 28 (numexpr -> LPAREN numexpr RPAREN .)
+    RBRACK          reduce using rule 28 (numexpr -> LPAREN numexpr RPAREN .)
+    SEMICOLON       reduce using rule 28 (numexpr -> LPAREN numexpr RPAREN .)
+
+
+state 92
+
+    (56) param -> ID COLON . setexpr
+    (7) setexpr -> . LBRACK NUMBER COMMA NUMBER RBRACK
+    (8) setexpr -> . LBRACE stringlist RBRACE
+    (9) setexpr -> . ID
+
+    LBRACK          shift and go to state 42
+    LBRACE          shift and go to state 43
+    ID              shift and go to state 40
+
+    setexpr                        shift and go to state 110
+
+state 93
+
+    (57) statement -> TRANSITION ID LPAREN paramlist RPAREN . boolexpr LBRACE effects RBRACE
+    (14) boolexpr -> . boolexpr AND boolexpr
+    (15) boolexpr -> . boolexpr OR boolexpr
+    (16) boolexpr -> . boolexpr IMPL boolexpr
+    (17) boolexpr -> . boolexpr EQVI boolexpr
+    (18) boolexpr -> . NOT boolexpr
+    (19) boolexpr -> . PTRUE
+    (20) boolexpr -> . PFALSE
+    (21) boolexpr -> . atom
+    (22) boolexpr -> . LPAREN boolexpr RPAREN
+    (23) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (24) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (25) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (26) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (27) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 14
+    PTRUE           shift and go to state 15
+    PFALSE          shift and go to state 16
+    LPAREN          shift and go to state 18
+    LBRACK          shift and go to state 19
+    ID              shift and go to state 12
+
+    boolexpr                       shift and go to state 111
+    atom                           shift and go to state 17
+
+state 94
+
+    (58) statement -> TRANSITION ID LPAREN RPAREN boolexpr . LBRACE effects RBRACE
+    (14) boolexpr -> boolexpr . AND boolexpr
+    (15) boolexpr -> boolexpr . OR boolexpr
+    (16) boolexpr -> boolexpr . IMPL boolexpr
+    (17) boolexpr -> boolexpr . EQVI boolexpr
+
+    LBRACE          shift and go to state 112
+    AND             shift and go to state 28
+    OR              shift and go to state 29
+    IMPL            shift and go to state 30
+    EQVI            shift and go to state 31
+
+
+state 95
+
+    (55) paramlist -> param COMMA . paramlist
+    (54) paramlist -> . param
+    (55) paramlist -> . param COMMA paramlist
+    (56) param -> . ID COLON setexpr
+
+    ID              shift and go to state 66
+
+    param                          shift and go to state 69
+    paramlist                      shift and go to state 113
+
+state 96
+
+    (7) setexpr -> LBRACK NUMBER COMMA . NUMBER RBRACK
+
+    NUMBER          shift and go to state 114
+
+
+state 97
+
+    (8) setexpr -> LBRACE stringlist RBRACE .
+
+    SEMICOLON       reduce using rule 8 (setexpr -> LBRACE stringlist RBRACE .)
+    COMMA           reduce using rule 8 (setexpr -> LBRACE stringlist RBRACE .)
+    RPAREN          reduce using rule 8 (setexpr -> LBRACE stringlist RBRACE .)
+
+
+state 98
+
+    (13) stringlist -> enum COMMA . stringlist
+    (10) stringlist -> . enum
+    (13) stringlist -> . enum COMMA stringlist
+    (11) enum -> . ID
+    (12) enum -> . NUMBER
+
+    ID              shift and go to state 74
+    NUMBER          shift and go to state 75
+
+    enum                           shift and go to state 73
+    stringlist                     shift and go to state 115
+
+state 99
+
+    (48) initlist -> atom EQ NUMBER COMMA initlist .
+
+    SEMICOLON       reduce using rule 48 (initlist -> atom EQ NUMBER COMMA initlist .)
+
+
+state 100
+
+    (34) tnumexpr -> LPAREN numexpr RPAREN .
+
+    PLUS            reduce using rule 34 (tnumexpr -> LPAREN numexpr RPAREN .)
+    MINUS           reduce using rule 34 (tnumexpr -> LPAREN numexpr RPAREN .)
+    TIMES           reduce using rule 34 (tnumexpr -> LPAREN numexpr RPAREN .)
+    COMMA           reduce using rule 34 (tnumexpr -> LPAREN numexpr RPAREN .)
+    RPAREN          reduce using rule 34 (tnumexpr -> LPAREN numexpr RPAREN .)
+
+
+state 101
+
+    (40) termlist -> term COMMA termlist .
+
+    RPAREN          reduce using rule 40 (termlist -> term COMMA termlist .)
+
+
+state 102
+
+    (37) tnumexpr -> tnumexpr PLUS tnumexpr .
+    (37) tnumexpr -> tnumexpr . PLUS tnumexpr
+    (38) tnumexpr -> tnumexpr . MINUS tnumexpr
+    (39) tnumexpr -> tnumexpr . TIMES tnumexpr
+
+    PLUS            reduce using rule 37 (tnumexpr -> tnumexpr PLUS tnumexpr .)
+    MINUS           reduce using rule 37 (tnumexpr -> tnumexpr PLUS tnumexpr .)
+    COMMA           reduce using rule 37 (tnumexpr -> tnumexpr PLUS tnumexpr .)
+    RPAREN          reduce using rule 37 (tnumexpr -> tnumexpr PLUS tnumexpr .)
+    TIMES           shift and go to state 82
+
+  ! TIMES           [ reduce using rule 37 (tnumexpr -> tnumexpr PLUS tnumexpr .) ]
+  ! PLUS            [ shift and go to state 80 ]
+  ! MINUS           [ shift and go to state 81 ]
+
+
+state 103
+
+    (38) tnumexpr -> tnumexpr MINUS tnumexpr .
+    (37) tnumexpr -> tnumexpr . PLUS tnumexpr
+    (38) tnumexpr -> tnumexpr . MINUS tnumexpr
+    (39) tnumexpr -> tnumexpr . TIMES tnumexpr
+
+    PLUS            reduce using rule 38 (tnumexpr -> tnumexpr MINUS tnumexpr .)
+    MINUS           reduce using rule 38 (tnumexpr -> tnumexpr MINUS tnumexpr .)
+    COMMA           reduce using rule 38 (tnumexpr -> tnumexpr MINUS tnumexpr .)
+    RPAREN          reduce using rule 38 (tnumexpr -> tnumexpr MINUS tnumexpr .)
+    TIMES           shift and go to state 82
+
+  ! TIMES           [ reduce using rule 38 (tnumexpr -> tnumexpr MINUS tnumexpr .) ]
+  ! PLUS            [ shift and go to state 80 ]
+  ! MINUS           [ shift and go to state 81 ]
+
+
+state 104
+
+    (39) tnumexpr -> tnumexpr TIMES tnumexpr .
+    (37) tnumexpr -> tnumexpr . PLUS tnumexpr
+    (38) tnumexpr -> tnumexpr . MINUS tnumexpr
+    (39) tnumexpr -> tnumexpr . TIMES tnumexpr
+
+    PLUS            reduce using rule 39 (tnumexpr -> tnumexpr TIMES tnumexpr .)
+    MINUS           reduce using rule 39 (tnumexpr -> tnumexpr TIMES tnumexpr .)
+    TIMES           reduce using rule 39 (tnumexpr -> tnumexpr TIMES tnumexpr .)
+    COMMA           reduce using rule 39 (tnumexpr -> tnumexpr TIMES tnumexpr .)
+    RPAREN          reduce using rule 39 (tnumexpr -> tnumexpr TIMES tnumexpr .)
+
+  ! PLUS            [ shift and go to state 80 ]
+  ! MINUS           [ shift and go to state 81 ]
+  ! TIMES           [ shift and go to state 82 ]
+
+
+state 105
+
+    (23) boolexpr -> LBRACK numexpr GT numexpr RBRACK .
+
+    SEMICOLON       reduce using rule 23 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    AND             reduce using rule 23 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    OR              reduce using rule 23 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    IMPL            reduce using rule 23 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    EQVI            reduce using rule 23 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    RPAREN          reduce using rule 23 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    LBRACE          reduce using rule 23 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+
+
+state 106
+
+    (24) boolexpr -> LBRACK numexpr LT numexpr RBRACK .
+
+    SEMICOLON       reduce using rule 24 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    AND             reduce using rule 24 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    OR              reduce using rule 24 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    IMPL            reduce using rule 24 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    EQVI            reduce using rule 24 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    RPAREN          reduce using rule 24 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    LBRACE          reduce using rule 24 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+
+
+state 107
+
+    (25) boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .
+
+    SEMICOLON       reduce using rule 25 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    AND             reduce using rule 25 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    OR              reduce using rule 25 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    IMPL            reduce using rule 25 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    EQVI            reduce using rule 25 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    RPAREN          reduce using rule 25 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    LBRACE          reduce using rule 25 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+
+
+state 108
+
+    (26) boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .
+
+    SEMICOLON       reduce using rule 26 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    AND             reduce using rule 26 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    OR              reduce using rule 26 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    IMPL            reduce using rule 26 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    EQVI            reduce using rule 26 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    RPAREN          reduce using rule 26 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    LBRACE          reduce using rule 26 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+
+
+state 109
+
+    (27) boolexpr -> LBRACK numexpr EQ numexpr RBRACK .
+
+    SEMICOLON       reduce using rule 27 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    AND             reduce using rule 27 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    OR              reduce using rule 27 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    IMPL            reduce using rule 27 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    EQVI            reduce using rule 27 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    RPAREN          reduce using rule 27 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    LBRACE          reduce using rule 27 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+
+
+state 110
+
+    (56) param -> ID COLON setexpr .
+
+    COMMA           reduce using rule 56 (param -> ID COLON setexpr .)
+    RPAREN          reduce using rule 56 (param -> ID COLON setexpr .)
+
+
+state 111
+
+    (57) statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr . LBRACE effects RBRACE
+    (14) boolexpr -> boolexpr . AND boolexpr
+    (15) boolexpr -> boolexpr . OR boolexpr
+    (16) boolexpr -> boolexpr . IMPL boolexpr
+    (17) boolexpr -> boolexpr . EQVI boolexpr
+
+    LBRACE          shift and go to state 116
+    AND             shift and go to state 28
+    OR              shift and go to state 29
+    IMPL            shift and go to state 30
+    EQVI            shift and go to state 31
+
+
+state 112
+
+    (58) statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE . effects RBRACE
+    (49) effects -> . effect
+    (50) effects -> . effect effects
+    (51) effect -> . atom SEMICOLON
+    (52) effect -> . NOT atom SEMICOLON
+    (53) effect -> . atom ASSIGN numexpr SEMICOLON
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 120
+    ID              shift and go to state 12
+
+    effects                        shift and go to state 117
+    effect                         shift and go to state 118
+    atom                           shift and go to state 119
+
+state 113
+
+    (55) paramlist -> param COMMA paramlist .
+
+    RPAREN          reduce using rule 55 (paramlist -> param COMMA paramlist .)
+
+
+state 114
+
+    (7) setexpr -> LBRACK NUMBER COMMA NUMBER . RBRACK
+
+    RBRACK          shift and go to state 121
+
+
+state 115
+
+    (13) stringlist -> enum COMMA stringlist .
+
+    RBRACE          reduce using rule 13 (stringlist -> enum COMMA stringlist .)
+
+
+state 116
+
+    (57) statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE . effects RBRACE
+    (49) effects -> . effect
+    (50) effects -> . effect effects
+    (51) effect -> . atom SEMICOLON
+    (52) effect -> . NOT atom SEMICOLON
+    (53) effect -> . atom ASSIGN numexpr SEMICOLON
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 120
+    ID              shift and go to state 12
+
+    effects                        shift and go to state 122
+    effect                         shift and go to state 118
+    atom                           shift and go to state 119
+
+state 117
+
+    (58) statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects . RBRACE
+
+    RBRACE          shift and go to state 123
+
+
+state 118
+
+    (49) effects -> effect .
+    (50) effects -> effect . effects
+    (49) effects -> . effect
+    (50) effects -> . effect effects
+    (51) effect -> . atom SEMICOLON
+    (52) effect -> . NOT atom SEMICOLON
+    (53) effect -> . atom ASSIGN numexpr SEMICOLON
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    RBRACE          reduce using rule 49 (effects -> effect .)
+    NOT             shift and go to state 120
+    ID              shift and go to state 12
+
+    effect                         shift and go to state 118
+    effects                        shift and go to state 124
+    atom                           shift and go to state 119
+
+state 119
+
+    (51) effect -> atom . SEMICOLON
+    (53) effect -> atom . ASSIGN numexpr SEMICOLON
+
+    SEMICOLON       shift and go to state 125
+    ASSIGN          shift and go to state 126
+
+
+state 120
+
+    (52) effect -> NOT . atom SEMICOLON
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    ID              shift and go to state 12
+
+    atom                           shift and go to state 127
+
+state 121
+
+    (7) setexpr -> LBRACK NUMBER COMMA NUMBER RBRACK .
+
+    SEMICOLON       reduce using rule 7 (setexpr -> LBRACK NUMBER COMMA NUMBER RBRACK .)
+    COMMA           reduce using rule 7 (setexpr -> LBRACK NUMBER COMMA NUMBER RBRACK .)
+    RPAREN          reduce using rule 7 (setexpr -> LBRACK NUMBER COMMA NUMBER RBRACK .)
+
+
+state 122
+
+    (57) statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects . RBRACE
+
+    RBRACE          shift and go to state 128
+
+
+state 123
+
+    (58) statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .
+
+    TYPE            reduce using rule 58 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+    SOURCE          reduce using rule 58 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+    SOURCEFORMULA   reduce using rule 58 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+    TARGET          reduce using rule 58 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+    TRANSITION      reduce using rule 58 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+    $end            reduce using rule 58 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+
+
+state 124
+
+    (50) effects -> effect effects .
+
+    RBRACE          reduce using rule 50 (effects -> effect effects .)
+
+
+state 125
+
+    (51) effect -> atom SEMICOLON .
+
+    NOT             reduce using rule 51 (effect -> atom SEMICOLON .)
+    ID              reduce using rule 51 (effect -> atom SEMICOLON .)
+    RBRACE          reduce using rule 51 (effect -> atom SEMICOLON .)
+
+
+state 126
+
+    (53) effect -> atom ASSIGN . numexpr SEMICOLON
+    (28) numexpr -> . LPAREN numexpr RPAREN
+    (29) numexpr -> . NUMBER
+    (30) numexpr -> . atom
+    (31) numexpr -> . numexpr PLUS numexpr
+    (32) numexpr -> . numexpr MINUS numexpr
+    (33) numexpr -> . numexpr TIMES numexpr
+    (43) atom -> . ID
+    (44) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 35
+    NUMBER          shift and go to state 36
+    ID              shift and go to state 12
+
+    atom                           shift and go to state 37
+    numexpr                        shift and go to state 129
+
+state 127
+
+    (52) effect -> NOT atom . SEMICOLON
+
+    SEMICOLON       shift and go to state 130
+
+
+state 128
+
+    (57) statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .
+
+    TYPE            reduce using rule 57 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+    SOURCE          reduce using rule 57 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+    SOURCEFORMULA   reduce using rule 57 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+    TARGET          reduce using rule 57 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+    TRANSITION      reduce using rule 57 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+    $end            reduce using rule 57 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+
+
+state 129
+
+    (53) effect -> atom ASSIGN numexpr . SEMICOLON
+    (31) numexpr -> numexpr . PLUS numexpr
+    (32) numexpr -> numexpr . MINUS numexpr
+    (33) numexpr -> numexpr . TIMES numexpr
+
+    SEMICOLON       shift and go to state 131
+    PLUS            shift and go to state 62
+    MINUS           shift and go to state 63
+    TIMES           shift and go to state 64
+
+
+state 130
+
+    (52) effect -> NOT atom SEMICOLON .
+
+    NOT             reduce using rule 52 (effect -> NOT atom SEMICOLON .)
+    ID              reduce using rule 52 (effect -> NOT atom SEMICOLON .)
+    RBRACE          reduce using rule 52 (effect -> NOT atom SEMICOLON .)
+
+
+state 131
+
+    (53) effect -> atom ASSIGN numexpr SEMICOLON .
+
+    NOT             reduce using rule 53 (effect -> atom ASSIGN numexpr SEMICOLON .)
+    ID              reduce using rule 53 (effect -> atom ASSIGN numexpr SEMICOLON .)
+    RBRACE          reduce using rule 53 (effect -> atom ASSIGN numexpr SEMICOLON .)
+

@@ -1,0 +1,22 @@
+
+This program reads a file that contains a model
+of a transition system, parses the file,
+grounds the specification, and finally translates
+it into a formula in the propositional logic.
+The grounded specification as well as the formula
+are printed to the standard output.
+
+To run the program you need
+
+  Python 3.x
+  PLY, which is a parser/lexer tool for Python
+  tulip / dd
+
+To install these in some Linux variants (e.g. Ubuntu), write
+
+  sudo apt-get install python3 python3-ply
+  pip3 install dd
+
+To run the BDD-based reachability analyzer write e.g.
+
+  python3 bddreachability.py SETBITS10.SPEC
