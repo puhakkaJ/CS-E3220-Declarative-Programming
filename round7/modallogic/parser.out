@@ -1,0 +1,753 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> spec
+Rule 1     spec -> kripkemodel formulas
+Rule 2     formulas -> formula SEMICOLON
+Rule 3     formulas -> formulas formula SEMICOLON
+Rule 4     kripkemodel -> MODEL worldlist END MODEL
+Rule 5     worldlist -> world
+Rule 6     worldlist -> worldlist world
+Rule 7     world -> ID LBRACE stringlist RBRACE stringlist SEMICOLON
+Rule 8     stringlist -> <empty>
+Rule 9     stringlist -> stringlist1
+Rule 10    stringlist1 -> ID
+Rule 11    stringlist1 -> stringlist1 COMMA ID
+Rule 12    formula -> formula AND formula
+Rule 13    formula -> formula OR formula
+Rule 14    formula -> formula IMPL formula
+Rule 15    formula -> formula EQVI formula
+Rule 16    formula -> NOT formula
+Rule 17    formula -> POSS formula
+Rule 18    formula -> NECE formula
+Rule 19    formula -> PTRUE
+Rule 20    formula -> PFALSE
+Rule 21    formula -> ID
+Rule 22    formula -> LPAREN formula RPAREN
+
+Terminals, with rules where they appear
+
+AND                  : 12
+COMMA                : 11
+END                  : 4
+EQVI                 : 15
+ID                   : 7 10 11 21
+IMPL                 : 14
+LBRACE               : 7
+LPAREN               : 22
+MODEL                : 4 4
+NECE                 : 18
+NOT                  : 16
+OR                   : 13
+PFALSE               : 20
+POSS                 : 17
+PTRUE                : 19
+RBRACE               : 7
+RPAREN               : 22
+SEMICOLON            : 2 3 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+formula              : 2 3 12 12 13 13 14 14 15 15 16 17 18 22
+formulas             : 1 3
+kripkemodel          : 1
+spec                 : 0
+stringlist           : 7 7
+stringlist1          : 9 11
+world                : 5 6
+worldlist            : 4 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . spec
+    (1) spec -> . kripkemodel formulas
+    (4) kripkemodel -> . MODEL worldlist END MODEL
+
+    MODEL           shift and go to state 3
+
+    spec                           shift and go to state 1
+    kripkemodel                    shift and go to state 2
+
+state 1
+
+    (0) S' -> spec .
+
+
+
+state 2
+
+    (1) spec -> kripkemodel . formulas
+    (2) formulas -> . formula SEMICOLON
+    (3) formulas -> . formulas formula SEMICOLON
+    (12) formula -> . formula AND formula
+    (13) formula -> . formula OR formula
+    (14) formula -> . formula IMPL formula
+    (15) formula -> . formula EQVI formula
+    (16) formula -> . NOT formula
+    (17) formula -> . POSS formula
+    (18) formula -> . NECE formula
+    (19) formula -> . PTRUE
+    (20) formula -> . PFALSE
+    (21) formula -> . ID
+    (22) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 6
+    POSS            shift and go to state 7
+    NECE            shift and go to state 8
+    PTRUE           shift and go to state 9
+    PFALSE          shift and go to state 10
+    ID              shift and go to state 11
+    LPAREN          shift and go to state 12
+
+    formulas                       shift and go to state 4
+    formula                        shift and go to state 5
+
+state 3
+
+    (4) kripkemodel -> MODEL . worldlist END MODEL
+    (5) worldlist -> . world
+    (6) worldlist -> . worldlist world
+    (7) world -> . ID LBRACE stringlist RBRACE stringlist SEMICOLON
+
+    ID              shift and go to state 15
+
+    worldlist                      shift and go to state 13
+    world                          shift and go to state 14
+
+state 4
+
+    (1) spec -> kripkemodel formulas .
+    (3) formulas -> formulas . formula SEMICOLON
+    (12) formula -> . formula AND formula
+    (13) formula -> . formula OR formula
+    (14) formula -> . formula IMPL formula
+    (15) formula -> . formula EQVI formula
+    (16) formula -> . NOT formula
+    (17) formula -> . POSS formula
+    (18) formula -> . NECE formula
+    (19) formula -> . PTRUE
+    (20) formula -> . PFALSE
+    (21) formula -> . ID
+    (22) formula -> . LPAREN formula RPAREN
+
+    $end            reduce using rule 1 (spec -> kripkemodel formulas .)
+    NOT             shift and go to state 6
+    POSS            shift and go to state 7
+    NECE            shift and go to state 8
+    PTRUE           shift and go to state 9
+    PFALSE          shift and go to state 10
+    ID              shift and go to state 11
+    LPAREN          shift and go to state 12
+
+    formula                        shift and go to state 16
+
+state 5
+
+    (2) formulas -> formula . SEMICOLON
+    (12) formula -> formula . AND formula
+    (13) formula -> formula . OR formula
+    (14) formula -> formula . IMPL formula
+    (15) formula -> formula . EQVI formula
+
+    SEMICOLON       shift and go to state 17
+    AND             shift and go to state 18
+    OR              shift and go to state 19
+    IMPL            shift and go to state 20
+    EQVI            shift and go to state 21
+
+
+state 6
+
+    (16) formula -> NOT . formula
+    (12) formula -> . formula AND formula
+    (13) formula -> . formula OR formula
+    (14) formula -> . formula IMPL formula
+    (15) formula -> . formula EQVI formula
+    (16) formula -> . NOT formula
+    (17) formula -> . POSS formula
+    (18) formula -> . NECE formula
+    (19) formula -> . PTRUE
+    (20) formula -> . PFALSE
+    (21) formula -> . ID
+    (22) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 6
+    POSS            shift and go to state 7
+    NECE            shift and go to state 8
+    PTRUE           shift and go to state 9
+    PFALSE          shift and go to state 10
+    ID              shift and go to state 11
+    LPAREN          shift and go to state 12
+
+    formula                        shift and go to state 22
+
+state 7
+
+    (17) formula -> POSS . formula
+    (12) formula -> . formula AND formula
+    (13) formula -> . formula OR formula
+    (14) formula -> . formula IMPL formula
+    (15) formula -> . formula EQVI formula
+    (16) formula -> . NOT formula
+    (17) formula -> . POSS formula
+    (18) formula -> . NECE formula
+    (19) formula -> . PTRUE
+    (20) formula -> . PFALSE
+    (21) formula -> . ID
+    (22) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 6
+    POSS            shift and go to state 7
+    NECE            shift and go to state 8
+    PTRUE           shift and go to state 9
+    PFALSE          shift and go to state 10
+    ID              shift and go to state 11
+    LPAREN          shift and go to state 12
+
+    formula                        shift and go to state 23
+
+state 8
+
+    (18) formula -> NECE . formula
+    (12) formula -> . formula AND formula
+    (13) formula -> . formula OR formula
+    (14) formula -> . formula IMPL formula
+    (15) formula -> . formula EQVI formula
+    (16) formula -> . NOT formula
+    (17) formula -> . POSS formula
+    (18) formula -> . NECE formula
+    (19) formula -> . PTRUE
+    (20) formula -> . PFALSE
+    (21) formula -> . ID
+    (22) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 6
+    POSS            shift and go to state 7
+    NECE            shift and go to state 8
+    PTRUE           shift and go to state 9
+    PFALSE          shift and go to state 10
+    ID              shift and go to state 11
+    LPAREN          shift and go to state 12
+
+    formula                        shift and go to state 24
+
+state 9
+
+    (19) formula -> PTRUE .
+
+    SEMICOLON       reduce using rule 19 (formula -> PTRUE .)
+    AND             reduce using rule 19 (formula -> PTRUE .)
+    OR              reduce using rule 19 (formula -> PTRUE .)
+    IMPL            reduce using rule 19 (formula -> PTRUE .)
+    EQVI            reduce using rule 19 (formula -> PTRUE .)
+    RPAREN          reduce using rule 19 (formula -> PTRUE .)
+
+
+state 10
+
+    (20) formula -> PFALSE .
+
+    SEMICOLON       reduce using rule 20 (formula -> PFALSE .)
+    AND             reduce using rule 20 (formula -> PFALSE .)
+    OR              reduce using rule 20 (formula -> PFALSE .)
+    IMPL            reduce using rule 20 (formula -> PFALSE .)
+    EQVI            reduce using rule 20 (formula -> PFALSE .)
+    RPAREN          reduce using rule 20 (formula -> PFALSE .)
+
+
+state 11
+
+    (21) formula -> ID .
+
+    SEMICOLON       reduce using rule 21 (formula -> ID .)
+    AND             reduce using rule 21 (formula -> ID .)
+    OR              reduce using rule 21 (formula -> ID .)
+    IMPL            reduce using rule 21 (formula -> ID .)
+    EQVI            reduce using rule 21 (formula -> ID .)
+    RPAREN          reduce using rule 21 (formula -> ID .)
+
+
+state 12
+
+    (22) formula -> LPAREN . formula RPAREN
+    (12) formula -> . formula AND formula
+    (13) formula -> . formula OR formula
+    (14) formula -> . formula IMPL formula
+    (15) formula -> . formula EQVI formula
+    (16) formula -> . NOT formula
+    (17) formula -> . POSS formula
+    (18) formula -> . NECE formula
+    (19) formula -> . PTRUE
+    (20) formula -> . PFALSE
+    (21) formula -> . ID
+    (22) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 6
+    POSS            shift and go to state 7
+    NECE            shift and go to state 8
+    PTRUE           shift and go to state 9
+    PFALSE          shift and go to state 10
+    ID              shift and go to state 11
+    LPAREN          shift and go to state 12
+
+    formula                        shift and go to state 25
+
+state 13
+
+    (4) kripkemodel -> MODEL worldlist . END MODEL
+    (6) worldlist -> worldlist . world
+    (7) world -> . ID LBRACE stringlist RBRACE stringlist SEMICOLON
+
+    END             shift and go to state 26
+    ID              shift and go to state 15
+
+    world                          shift and go to state 27
+
+state 14
+
+    (5) worldlist -> world .
+
+    END             reduce using rule 5 (worldlist -> world .)
+    ID              reduce using rule 5 (worldlist -> world .)
+
+
+state 15
+
+    (7) world -> ID . LBRACE stringlist RBRACE stringlist SEMICOLON
+
+    LBRACE          shift and go to state 28
+
+
+state 16
+
+    (3) formulas -> formulas formula . SEMICOLON
+    (12) formula -> formula . AND formula
+    (13) formula -> formula . OR formula
+    (14) formula -> formula . IMPL formula
+    (15) formula -> formula . EQVI formula
+
+    SEMICOLON       shift and go to state 29
+    AND             shift and go to state 18
+    OR              shift and go to state 19
+    IMPL            shift and go to state 20
+    EQVI            shift and go to state 21
+
+
+state 17
+
+    (2) formulas -> formula SEMICOLON .
+
+    NOT             reduce using rule 2 (formulas -> formula SEMICOLON .)
+    POSS            reduce using rule 2 (formulas -> formula SEMICOLON .)
+    NECE            reduce using rule 2 (formulas -> formula SEMICOLON .)
+    PTRUE           reduce using rule 2 (formulas -> formula SEMICOLON .)
+    PFALSE          reduce using rule 2 (formulas -> formula SEMICOLON .)
+    ID              reduce using rule 2 (formulas -> formula SEMICOLON .)
+    LPAREN          reduce using rule 2 (formulas -> formula SEMICOLON .)
+    $end            reduce using rule 2 (formulas -> formula SEMICOLON .)
+
+
+state 18
+
+    (12) formula -> formula AND . formula
+    (12) formula -> . formula AND formula
+    (13) formula -> . formula OR formula
+    (14) formula -> . formula IMPL formula
+    (15) formula -> . formula EQVI formula
+    (16) formula -> . NOT formula
+    (17) formula -> . POSS formula
+    (18) formula -> . NECE formula
+    (19) formula -> . PTRUE
+    (20) formula -> . PFALSE
+    (21) formula -> . ID
+    (22) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 6
+    POSS            shift and go to state 7
+    NECE            shift and go to state 8
+    PTRUE           shift and go to state 9
+    PFALSE          shift and go to state 10
+    ID              shift and go to state 11
+    LPAREN          shift and go to state 12
+
+    formula                        shift and go to state 30
+
+state 19
+
+    (13) formula -> formula OR . formula
+    (12) formula -> . formula AND formula
+    (13) formula -> . formula OR formula
+    (14) formula -> . formula IMPL formula
+    (15) formula -> . formula EQVI formula
+    (16) formula -> . NOT formula
+    (17) formula -> . POSS formula
+    (18) formula -> . NECE formula
+    (19) formula -> . PTRUE
+    (20) formula -> . PFALSE
+    (21) formula -> . ID
+    (22) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 6
+    POSS            shift and go to state 7
+    NECE            shift and go to state 8
+    PTRUE           shift and go to state 9
+    PFALSE          shift and go to state 10
+    ID              shift and go to state 11
+    LPAREN          shift and go to state 12
+
+    formula                        shift and go to state 31
+
+state 20
+
+    (14) formula -> formula IMPL . formula
+    (12) formula -> . formula AND formula
+    (13) formula -> . formula OR formula
+    (14) formula -> . formula IMPL formula
+    (15) formula -> . formula EQVI formula
+    (16) formula -> . NOT formula
+    (17) formula -> . POSS formula
+    (18) formula -> . NECE formula
+    (19) formula -> . PTRUE
+    (20) formula -> . PFALSE
+    (21) formula -> . ID
+    (22) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 6
+    POSS            shift and go to state 7
+    NECE            shift and go to state 8
+    PTRUE           shift and go to state 9
+    PFALSE          shift and go to state 10
+    ID              shift and go to state 11
+    LPAREN          shift and go to state 12
+
+    formula                        shift and go to state 32
+
+state 21
+
+    (15) formula -> formula EQVI . formula
+    (12) formula -> . formula AND formula
+    (13) formula -> . formula OR formula
+    (14) formula -> . formula IMPL formula
+    (15) formula -> . formula EQVI formula
+    (16) formula -> . NOT formula
+    (17) formula -> . POSS formula
+    (18) formula -> . NECE formula
+    (19) formula -> . PTRUE
+    (20) formula -> . PFALSE
+    (21) formula -> . ID
+    (22) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 6
+    POSS            shift and go to state 7
+    NECE            shift and go to state 8
+    PTRUE           shift and go to state 9
+    PFALSE          shift and go to state 10
+    ID              shift and go to state 11
+    LPAREN          shift and go to state 12
+
+    formula                        shift and go to state 33
+
+state 22
+
+    (16) formula -> NOT formula .
+    (12) formula -> formula . AND formula
+    (13) formula -> formula . OR formula
+    (14) formula -> formula . IMPL formula
+    (15) formula -> formula . EQVI formula
+
+    SEMICOLON       reduce using rule 16 (formula -> NOT formula .)
+    AND             reduce using rule 16 (formula -> NOT formula .)
+    OR              reduce using rule 16 (formula -> NOT formula .)
+    IMPL            reduce using rule 16 (formula -> NOT formula .)
+    EQVI            reduce using rule 16 (formula -> NOT formula .)
+    RPAREN          reduce using rule 16 (formula -> NOT formula .)
+
+  ! AND             [ shift and go to state 18 ]
+  ! OR              [ shift and go to state 19 ]
+  ! IMPL            [ shift and go to state 20 ]
+  ! EQVI            [ shift and go to state 21 ]
+
+
+state 23
+
+    (17) formula -> POSS formula .
+    (12) formula -> formula . AND formula
+    (13) formula -> formula . OR formula
+    (14) formula -> formula . IMPL formula
+    (15) formula -> formula . EQVI formula
+
+    SEMICOLON       reduce using rule 17 (formula -> POSS formula .)
+    AND             reduce using rule 17 (formula -> POSS formula .)
+    OR              reduce using rule 17 (formula -> POSS formula .)
+    IMPL            reduce using rule 17 (formula -> POSS formula .)
+    EQVI            reduce using rule 17 (formula -> POSS formula .)
+    RPAREN          reduce using rule 17 (formula -> POSS formula .)
+
+  ! AND             [ shift and go to state 18 ]
+  ! OR              [ shift and go to state 19 ]
+  ! IMPL            [ shift and go to state 20 ]
+  ! EQVI            [ shift and go to state 21 ]
+
+
+state 24
+
+    (18) formula -> NECE formula .
+    (12) formula -> formula . AND formula
+    (13) formula -> formula . OR formula
+    (14) formula -> formula . IMPL formula
+    (15) formula -> formula . EQVI formula
+
+    SEMICOLON       reduce using rule 18 (formula -> NECE formula .)
+    AND             reduce using rule 18 (formula -> NECE formula .)
+    OR              reduce using rule 18 (formula -> NECE formula .)
+    IMPL            reduce using rule 18 (formula -> NECE formula .)
+    EQVI            reduce using rule 18 (formula -> NECE formula .)
+    RPAREN          reduce using rule 18 (formula -> NECE formula .)
+
+  ! AND             [ shift and go to state 18 ]
+  ! OR              [ shift and go to state 19 ]
+  ! IMPL            [ shift and go to state 20 ]
+  ! EQVI            [ shift and go to state 21 ]
+
+
+state 25
+
+    (22) formula -> LPAREN formula . RPAREN
+    (12) formula -> formula . AND formula
+    (13) formula -> formula . OR formula
+    (14) formula -> formula . IMPL formula
+    (15) formula -> formula . EQVI formula
+
+    RPAREN          shift and go to state 34
+    AND             shift and go to state 18
+    OR              shift and go to state 19
+    IMPL            shift and go to state 20
+    EQVI            shift and go to state 21
+
+
+state 26
+
+    (4) kripkemodel -> MODEL worldlist END . MODEL
+
+    MODEL           shift and go to state 35
+
+
+state 27
+
+    (6) worldlist -> worldlist world .
+
+    END             reduce using rule 6 (worldlist -> worldlist world .)
+    ID              reduce using rule 6 (worldlist -> worldlist world .)
+
+
+state 28
+
+    (7) world -> ID LBRACE . stringlist RBRACE stringlist SEMICOLON
+    (8) stringlist -> .
+    (9) stringlist -> . stringlist1
+    (10) stringlist1 -> . ID
+    (11) stringlist1 -> . stringlist1 COMMA ID
+
+    RBRACE          reduce using rule 8 (stringlist -> .)
+    ID              shift and go to state 36
+
+    stringlist                     shift and go to state 37
+    stringlist1                    shift and go to state 38
+
+state 29
+
+    (3) formulas -> formulas formula SEMICOLON .
+
+    NOT             reduce using rule 3 (formulas -> formulas formula SEMICOLON .)
+    POSS            reduce using rule 3 (formulas -> formulas formula SEMICOLON .)
+    NECE            reduce using rule 3 (formulas -> formulas formula SEMICOLON .)
+    PTRUE           reduce using rule 3 (formulas -> formulas formula SEMICOLON .)
+    PFALSE          reduce using rule 3 (formulas -> formulas formula SEMICOLON .)
+    ID              reduce using rule 3 (formulas -> formulas formula SEMICOLON .)
+    LPAREN          reduce using rule 3 (formulas -> formulas formula SEMICOLON .)
+    $end            reduce using rule 3 (formulas -> formulas formula SEMICOLON .)
+
+
+state 30
+
+    (12) formula -> formula AND formula .
+    (12) formula -> formula . AND formula
+    (13) formula -> formula . OR formula
+    (14) formula -> formula . IMPL formula
+    (15) formula -> formula . EQVI formula
+
+    SEMICOLON       reduce using rule 12 (formula -> formula AND formula .)
+    AND             reduce using rule 12 (formula -> formula AND formula .)
+    OR              reduce using rule 12 (formula -> formula AND formula .)
+    IMPL            reduce using rule 12 (formula -> formula AND formula .)
+    EQVI            reduce using rule 12 (formula -> formula AND formula .)
+    RPAREN          reduce using rule 12 (formula -> formula AND formula .)
+
+  ! AND             [ shift and go to state 18 ]
+  ! OR              [ shift and go to state 19 ]
+  ! IMPL            [ shift and go to state 20 ]
+  ! EQVI            [ shift and go to state 21 ]
+
+
+state 31
+
+    (13) formula -> formula OR formula .
+    (12) formula -> formula . AND formula
+    (13) formula -> formula . OR formula
+    (14) formula -> formula . IMPL formula
+    (15) formula -> formula . EQVI formula
+
+    SEMICOLON       reduce using rule 13 (formula -> formula OR formula .)
+    AND             reduce using rule 13 (formula -> formula OR formula .)
+    OR              reduce using rule 13 (formula -> formula OR formula .)
+    IMPL            reduce using rule 13 (formula -> formula OR formula .)
+    EQVI            reduce using rule 13 (formula -> formula OR formula .)
+    RPAREN          reduce using rule 13 (formula -> formula OR formula .)
+
+  ! AND             [ shift and go to state 18 ]
+  ! OR              [ shift and go to state 19 ]
+  ! IMPL            [ shift and go to state 20 ]
+  ! EQVI            [ shift and go to state 21 ]
+
+
+state 32
+
+    (14) formula -> formula IMPL formula .
+    (12) formula -> formula . AND formula
+    (13) formula -> formula . OR formula
+    (14) formula -> formula . IMPL formula
+    (15) formula -> formula . EQVI formula
+
+    SEMICOLON       reduce using rule 14 (formula -> formula IMPL formula .)
+    EQVI            reduce using rule 14 (formula -> formula IMPL formula .)
+    RPAREN          reduce using rule 14 (formula -> formula IMPL formula .)
+    AND             shift and go to state 18
+    OR              shift and go to state 19
+    IMPL            shift and go to state 20
+
+  ! AND             [ reduce using rule 14 (formula -> formula IMPL formula .) ]
+  ! OR              [ reduce using rule 14 (formula -> formula IMPL formula .) ]
+  ! IMPL            [ reduce using rule 14 (formula -> formula IMPL formula .) ]
+  ! EQVI            [ shift and go to state 21 ]
+
+
+state 33
+
+    (15) formula -> formula EQVI formula .
+    (12) formula -> formula . AND formula
+    (13) formula -> formula . OR formula
+    (14) formula -> formula . IMPL formula
+    (15) formula -> formula . EQVI formula
+
+    SEMICOLON       reduce using rule 15 (formula -> formula EQVI formula .)
+    RPAREN          reduce using rule 15 (formula -> formula EQVI formula .)
+    AND             shift and go to state 18
+    OR              shift and go to state 19
+    IMPL            shift and go to state 20
+    EQVI            shift and go to state 21
+
+  ! AND             [ reduce using rule 15 (formula -> formula EQVI formula .) ]
+  ! OR              [ reduce using rule 15 (formula -> formula EQVI formula .) ]
+  ! IMPL            [ reduce using rule 15 (formula -> formula EQVI formula .) ]
+  ! EQVI            [ reduce using rule 15 (formula -> formula EQVI formula .) ]
+
+
+state 34
+
+    (22) formula -> LPAREN formula RPAREN .
+
+    SEMICOLON       reduce using rule 22 (formula -> LPAREN formula RPAREN .)
+    AND             reduce using rule 22 (formula -> LPAREN formula RPAREN .)
+    OR              reduce using rule 22 (formula -> LPAREN formula RPAREN .)
+    IMPL            reduce using rule 22 (formula -> LPAREN formula RPAREN .)
+    EQVI            reduce using rule 22 (formula -> LPAREN formula RPAREN .)
+    RPAREN          reduce using rule 22 (formula -> LPAREN formula RPAREN .)
+
+
+state 35
+
+    (4) kripkemodel -> MODEL worldlist END MODEL .
+
+    NOT             reduce using rule 4 (kripkemodel -> MODEL worldlist END MODEL .)
+    POSS            reduce using rule 4 (kripkemodel -> MODEL worldlist END MODEL .)
+    NECE            reduce using rule 4 (kripkemodel -> MODEL worldlist END MODEL .)
+    PTRUE           reduce using rule 4 (kripkemodel -> MODEL worldlist END MODEL .)
+    PFALSE          reduce using rule 4 (kripkemodel -> MODEL worldlist END MODEL .)
+    ID              reduce using rule 4 (kripkemodel -> MODEL worldlist END MODEL .)
+    LPAREN          reduce using rule 4 (kripkemodel -> MODEL worldlist END MODEL .)
+
+
+state 36
+
+    (10) stringlist1 -> ID .
+
+    COMMA           reduce using rule 10 (stringlist1 -> ID .)
+    RBRACE          reduce using rule 10 (stringlist1 -> ID .)
+    SEMICOLON       reduce using rule 10 (stringlist1 -> ID .)
+
+
+state 37
+
+    (7) world -> ID LBRACE stringlist . RBRACE stringlist SEMICOLON
+
+    RBRACE          shift and go to state 39
+
+
+state 38
+
+    (9) stringlist -> stringlist1 .
+    (11) stringlist1 -> stringlist1 . COMMA ID
+
+    RBRACE          reduce using rule 9 (stringlist -> stringlist1 .)
+    SEMICOLON       reduce using rule 9 (stringlist -> stringlist1 .)
+    COMMA           shift and go to state 40
+
+
+state 39
+
+    (7) world -> ID LBRACE stringlist RBRACE . stringlist SEMICOLON
+    (8) stringlist -> .
+    (9) stringlist -> . stringlist1
+    (10) stringlist1 -> . ID
+    (11) stringlist1 -> . stringlist1 COMMA ID
+
+    SEMICOLON       reduce using rule 8 (stringlist -> .)
+    ID              shift and go to state 36
+
+    stringlist                     shift and go to state 41
+    stringlist1                    shift and go to state 38
+
+state 40
+
+    (11) stringlist1 -> stringlist1 COMMA . ID
+
+    ID              shift and go to state 42
+
+
+state 41
+
+    (7) world -> ID LBRACE stringlist RBRACE stringlist . SEMICOLON
+
+    SEMICOLON       shift and go to state 43
+
+
+state 42
+
+    (11) stringlist1 -> stringlist1 COMMA ID .
+
+    COMMA           reduce using rule 11 (stringlist1 -> stringlist1 COMMA ID .)
+    RBRACE          reduce using rule 11 (stringlist1 -> stringlist1 COMMA ID .)
+    SEMICOLON       reduce using rule 11 (stringlist1 -> stringlist1 COMMA ID .)
+
+
+state 43
+
+    (7) world -> ID LBRACE stringlist RBRACE stringlist SEMICOLON .
+
+    END             reduce using rule 7 (world -> ID LBRACE stringlist RBRACE stringlist SEMICOLON .)
+    ID              reduce using rule 7 (world -> ID LBRACE stringlist RBRACE stringlist SEMICOLON .)
+

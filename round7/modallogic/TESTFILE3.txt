@@ -1,0 +1,29 @@
+
+#
+# Here is a dummy Kripke model, with five worlds, all atomic propositions
+# false in all worlds, and no accessible worlds for any world.
+
+model
+ w0 {a,b} w1,w2;
+ w1 {c, b} w4;
+ w2 {a} w3;
+ w3 {a,b,c} w0;
+ w4 {b, c} w3;
+end model
+
+#
+# Your task is to extend the model so that all of the following formulas
+# are true in the Kripke model.
+#
+
+a and b;
+
+POSS (not a and b);
+
+POSS not b;
+
+POSS NECE (a and b);
+
+POSS NECE (not a);
+
+NECE NECE c;

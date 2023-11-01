@@ -1,0 +1,44 @@
+#
+# A Kripke model is specified by listing all worlds in it, and for each world
+# the set of atomic propositions that are TRUE in it (and the rest are FALSE),
+# and finally listing all the worlds that are accessible. The description of
+# each world is terminated by a semicolon.
+#
+# In this example, we interpret worlds as persons, accessibility relation as
+# the "has friend" relation, so that NECE phi means "all friends have property phi"
+# and POSS phi means "at least one friend has property phi".
+#
+
+model
+  jussi { computerscientist, male } eliza, detlef;
+  eliza { computerscientist, female } jussi, detlef, mary, john;
+  detlef { male, magician } mary;
+  mary { female, mathematician } eliza, john;
+  john { male, computerscientist } jussi;
+end model
+
+# Then we have a list of formulas that will be evaluated in the given Kripke
+# model.
+#
+
+# Jussi has at least one friend who is a computer scientist. (true)
+
+POSS computerscientist;
+
+# All Jussi's friends who are computer scientists have a friend who is a magician. (true)
+
+NECE (computerscientist impl POSS magician);
+
+# Jussi has a friend who has a friend who has a friend, who is a mathematician. (true)
+
+POSS POSS POSS mathematician;
+
+# Jussi has a friend who has a friend who is a magician and who has a friend, who is a mathematician. (true)
+
+POSS POSS (magician and POSS mathematician);
+
+# Jussi has a male friend who has a friend who is a computer scientist. (false)
+
+POSS (male and POSS computerscientist);
+
+#

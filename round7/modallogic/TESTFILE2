@@ -1,0 +1,39 @@
+#
+# A Kripke model is specified by listing all worlds in it, and for each world
+# the set of atomic propositions that are TRUE in it (and the rest are FALSE),
+# and finally listing all the worlds that are accessible. The description of
+# each world is terminated by a semicolon.
+
+# In this example, we interpret worlds as states of a system, and
+# the accessibility relation as the "next state" relation. The system
+# in this case is non-deterministic, so a given state may have more than
+# one next state. Each state has state variables of possibly different
+# values (but a value combination for a state might not be unique for
+# a state, so the states have an identity that is independent of the values
+# of the state variables.)
+#
+
+model
+ s0 { a } s10, s11;
+ s10 { a, b } s20, s21 ;
+ s11 { a, c } s22;
+ s20 { b } s0;
+ s21 { c } s0;
+ s22 { a, b, c } s0;
+end model
+
+# From s0 all states reachable in two steps have the property 'b or c'. (true)
+
+NECE NECE (b or c);
+
+# From s0 all one-step reachable states have a successor state
+# that has property 'a and b and c'. (false)
+
+NECE POSS (a and b and c);
+
+# From s0 all one-step reachable states that have property c, have a successor
+# that has property 'a and b and c'. (true)
+
+NECE (c impl POSS (a and b and c));
+
+#
