@@ -1,0 +1,3683 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> spec
+Rule 1     spec -> statement
+Rule 2     spec -> statement spec
+Rule 3     statement -> ID EQ NUMBER SEMICOLON
+Rule 4     statement -> TYPE ID EQ setexpr SEMICOLON
+Rule 5     statement -> SOURCE initlist SEMICOLON
+Rule 6     statement -> SOURCEFORMULA boolexpr SEMICOLON
+Rule 7     statement -> CTLTARGET CTLformula SEMICOLON
+Rule 8     setexpr -> LBRACK tnumexpr COMMA tnumexpr RBRACK
+Rule 9     setexpr -> LBRACE stringlist RBRACE
+Rule 10    setexpr -> ID
+Rule 11    stringlist -> enum
+Rule 12    enum -> ID
+Rule 13    enum -> NUMBER
+Rule 14    stringlist -> enum COMMA stringlist
+Rule 15    boolexpr -> boolexpr AND boolexpr
+Rule 16    boolexpr -> boolexpr OR boolexpr
+Rule 17    boolexpr -> boolexpr IMPL boolexpr
+Rule 18    boolexpr -> boolexpr EQVI boolexpr
+Rule 19    boolexpr -> NOT boolexpr
+Rule 20    boolexpr -> PTRUE
+Rule 21    boolexpr -> PFALSE
+Rule 22    boolexpr -> EXISTS LPAREN paramlist RPAREN boolexpr
+Rule 23    boolexpr -> FORALL LPAREN paramlist RPAREN boolexpr
+Rule 24    boolexprlist -> boolexpr
+Rule 25    boolexprlist -> boolexpr COMMA boolexprlist
+Rule 26    boolexpr -> atom
+Rule 27    boolexpr -> atom AT NUMBER
+Rule 28    boolexpr -> LPAREN boolexpr RPAREN
+Rule 29    boolexpr -> LBRACK numexpr GT numexpr RBRACK
+Rule 30    boolexpr -> LBRACK numexpr LT numexpr RBRACK
+Rule 31    boolexpr -> LBRACK numexpr GEQ numexpr RBRACK
+Rule 32    boolexpr -> LBRACK numexpr LEQ numexpr RBRACK
+Rule 33    boolexpr -> LBRACK numexpr EQ numexpr RBRACK
+Rule 34    CTLformula -> CTLformula AND CTLformula
+Rule 35    CTLformula -> CTLformula OR CTLformula
+Rule 36    CTLformula -> CTLformula IMPL CTLformula
+Rule 37    CTLformula -> CTLformula EQVI CTLformula
+Rule 38    CTLformula -> PTRUE
+Rule 39    CTLformula -> PFALSE
+Rule 40    CTLformula -> NOT CTLformula
+Rule 41    CTLformula -> atom
+Rule 42    CTLformula -> LPAREN CTLformula RPAREN
+Rule 43    CTLformula -> EX CTLformula
+Rule 44    CTLformula -> EG CTLformula
+Rule 45    CTLformula -> E LBRACK CTLformula U CTLformula RBRACK
+Rule 46    CTLformula -> EF CTLformula
+Rule 47    CTLformula -> AX CTLformula
+Rule 48    CTLformula -> AG CTLformula
+Rule 49    CTLformula -> A LBRACK CTLformula U CTLformula RBRACK
+Rule 50    CTLformula -> AF CTLformula
+Rule 51    numexpr -> LPAREN numexpr RPAREN
+Rule 52    numexpr -> NUMBER
+Rule 53    numexpr -> atom
+Rule 54    numexpr -> numexpr PLUS numexpr
+Rule 55    numexpr -> numexpr MINUS numexpr
+Rule 56    numexpr -> numexpr TIMES numexpr
+Rule 57    tnumexpr -> LPAREN numexpr RPAREN
+Rule 58    tnumexpr -> NUMBER
+Rule 59    tnumexpr -> ID
+Rule 60    tnumexpr -> tnumexpr PLUS tnumexpr
+Rule 61    tnumexpr -> tnumexpr MINUS tnumexpr
+Rule 62    tnumexpr -> tnumexpr TIMES tnumexpr
+Rule 63    termlist -> term COMMA termlist
+Rule 64    termlist -> term
+Rule 65    term -> tnumexpr
+Rule 66    atom -> ID
+Rule 67    atom -> ID LPAREN termlist RPAREN
+Rule 68    initlist -> atom
+Rule 69    initlist -> atom COMMA initlist
+Rule 70    initlist -> atom EQ NUMBER
+Rule 71    initlist -> atom EQ NUMBER COMMA initlist
+Rule 72    effects -> effect
+Rule 73    effects -> effect effects
+Rule 74    effect -> atom SEMICOLON
+Rule 75    effect -> NOT atom SEMICOLON
+Rule 76    effect -> atom ASSIGN numexpr SEMICOLON
+Rule 77    effect -> IF boolexpr LBRACE effects RBRACE
+Rule 78    effect -> FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE
+Rule 79    paramlist -> param
+Rule 80    paramlist -> param COMMA paramlist
+Rule 81    param -> ID COLON setexpr
+Rule 82    statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE
+Rule 83    statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE
+
+Terminals, with rules where they appear
+
+A                    : 49
+AF                   : 50
+AG                   : 48
+AND                  : 15 34
+ASSIGN               : 76
+AT                   : 27
+AX                   : 47
+COLON                : 81
+COMMA                : 8 14 25 63 69 71 80
+CTLTARGET            : 7
+E                    : 45
+EF                   : 46
+EG                   : 44
+EQ                   : 3 4 33 70 71
+EQVI                 : 18 37
+EX                   : 43
+EXISTS               : 22
+FORALL               : 23 78
+GEQ                  : 31
+GT                   : 29
+ID                   : 3 4 10 12 59 66 67 81 82 83
+IF                   : 77
+IMPL                 : 17 36
+LBRACE               : 9 77 78 82 83
+LBRACK               : 8 29 30 31 32 33 45 49
+LEQ                  : 32
+LPAREN               : 22 23 28 42 51 57 67 78 82 83
+LT                   : 30
+MINUS                : 55 61
+NOT                  : 19 40 75
+NUMBER               : 3 13 27 52 58 70 71
+OR                   : 16 35
+PFALSE               : 21 39
+PLUS                 : 54 60
+PTRUE                : 20 38
+RBRACE               : 9 77 78 82 83
+RBRACK               : 8 29 30 31 32 33 45 49
+RPAREN               : 22 23 28 42 51 57 67 78 82 83
+SEMICOLON            : 3 4 5 6 7 74 75 76
+SOURCE               : 5
+SOURCEFORMULA        : 6
+TIMES                : 56 62
+TRANSITION           : 82 83
+TYPE                 : 4
+U                    : 45 49
+error                : 
+
+Nonterminals, with rules where they appear
+
+CTLformula           : 7 34 34 35 35 36 36 37 37 40 42 43 44 45 45 46 47 48 49 49 50
+atom                 : 26 27 41 53 68 69 70 71 74 75 76
+boolexpr             : 6 15 15 16 16 17 17 18 18 19 22 23 24 25 28 77 82 83
+boolexprlist         : 25
+effect               : 72 73
+effects              : 73 77 78 82 83
+enum                 : 11 14
+initlist             : 5 69 71
+numexpr              : 29 29 30 30 31 31 32 32 33 33 51 54 54 55 55 56 56 57 76
+param                : 79 80
+paramlist            : 22 23 78 80 82
+setexpr              : 4 81
+spec                 : 2 0
+statement            : 1 2
+stringlist           : 9 14
+term                 : 63 64
+termlist             : 63 67
+tnumexpr             : 8 8 60 60 61 61 62 62 65
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . spec
+    (1) spec -> . statement
+    (2) spec -> . statement spec
+    (3) statement -> . ID EQ NUMBER SEMICOLON
+    (4) statement -> . TYPE ID EQ setexpr SEMICOLON
+    (5) statement -> . SOURCE initlist SEMICOLON
+    (6) statement -> . SOURCEFORMULA boolexpr SEMICOLON
+    (7) statement -> . CTLTARGET CTLformula SEMICOLON
+    (82) statement -> . TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE
+    (83) statement -> . TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE
+
+    ID              shift and go to state 3
+    TYPE            shift and go to state 4
+    SOURCE          shift and go to state 5
+    SOURCEFORMULA   shift and go to state 6
+    CTLTARGET       shift and go to state 7
+    TRANSITION      shift and go to state 8
+
+    spec                           shift and go to state 1
+    statement                      shift and go to state 2
+
+state 1
+
+    (0) S' -> spec .
+
+
+
+state 2
+
+    (1) spec -> statement .
+    (2) spec -> statement . spec
+    (1) spec -> . statement
+    (2) spec -> . statement spec
+    (3) statement -> . ID EQ NUMBER SEMICOLON
+    (4) statement -> . TYPE ID EQ setexpr SEMICOLON
+    (5) statement -> . SOURCE initlist SEMICOLON
+    (6) statement -> . SOURCEFORMULA boolexpr SEMICOLON
+    (7) statement -> . CTLTARGET CTLformula SEMICOLON
+    (82) statement -> . TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE
+    (83) statement -> . TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE
+
+    $end            reduce using rule 1 (spec -> statement .)
+    ID              shift and go to state 3
+    TYPE            shift and go to state 4
+    SOURCE          shift and go to state 5
+    SOURCEFORMULA   shift and go to state 6
+    CTLTARGET       shift and go to state 7
+    TRANSITION      shift and go to state 8
+
+    statement                      shift and go to state 2
+    spec                           shift and go to state 9
+
+state 3
+
+    (3) statement -> ID . EQ NUMBER SEMICOLON
+
+    EQ              shift and go to state 10
+
+
+state 4
+
+    (4) statement -> TYPE . ID EQ setexpr SEMICOLON
+
+    ID              shift and go to state 11
+
+
+state 5
+
+    (5) statement -> SOURCE . initlist SEMICOLON
+    (68) initlist -> . atom
+    (69) initlist -> . atom COMMA initlist
+    (70) initlist -> . atom EQ NUMBER
+    (71) initlist -> . atom EQ NUMBER COMMA initlist
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    ID              shift and go to state 14
+
+    initlist                       shift and go to state 12
+    atom                           shift and go to state 13
+
+state 6
+
+    (6) statement -> SOURCEFORMULA . boolexpr SEMICOLON
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 15
+    atom                           shift and go to state 22
+
+state 7
+
+    (7) statement -> CTLTARGET . CTLformula SEMICOLON
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 24
+    atom                           shift and go to state 28
+
+state 8
+
+    (82) statement -> TRANSITION . ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE
+    (83) statement -> TRANSITION . ID LPAREN RPAREN boolexpr LBRACE effects RBRACE
+
+    ID              shift and go to state 38
+
+
+state 9
+
+    (2) spec -> statement spec .
+
+    $end            reduce using rule 2 (spec -> statement spec .)
+
+
+state 10
+
+    (3) statement -> ID EQ . NUMBER SEMICOLON
+
+    NUMBER          shift and go to state 39
+
+
+state 11
+
+    (4) statement -> TYPE ID . EQ setexpr SEMICOLON
+
+    EQ              shift and go to state 40
+
+
+state 12
+
+    (5) statement -> SOURCE initlist . SEMICOLON
+
+    SEMICOLON       shift and go to state 41
+
+
+state 13
+
+    (68) initlist -> atom .
+    (69) initlist -> atom . COMMA initlist
+    (70) initlist -> atom . EQ NUMBER
+    (71) initlist -> atom . EQ NUMBER COMMA initlist
+
+    SEMICOLON       reduce using rule 68 (initlist -> atom .)
+    COMMA           shift and go to state 42
+    EQ              shift and go to state 43
+
+
+state 14
+
+    (66) atom -> ID .
+    (67) atom -> ID . LPAREN termlist RPAREN
+
+    COMMA           reduce using rule 66 (atom -> ID .)
+    EQ              reduce using rule 66 (atom -> ID .)
+    SEMICOLON       reduce using rule 66 (atom -> ID .)
+    AT              reduce using rule 66 (atom -> ID .)
+    AND             reduce using rule 66 (atom -> ID .)
+    OR              reduce using rule 66 (atom -> ID .)
+    IMPL            reduce using rule 66 (atom -> ID .)
+    EQVI            reduce using rule 66 (atom -> ID .)
+    RPAREN          reduce using rule 66 (atom -> ID .)
+    LBRACE          reduce using rule 66 (atom -> ID .)
+    GT              reduce using rule 66 (atom -> ID .)
+    LT              reduce using rule 66 (atom -> ID .)
+    GEQ             reduce using rule 66 (atom -> ID .)
+    LEQ             reduce using rule 66 (atom -> ID .)
+    PLUS            reduce using rule 66 (atom -> ID .)
+    MINUS           reduce using rule 66 (atom -> ID .)
+    TIMES           reduce using rule 66 (atom -> ID .)
+    U               reduce using rule 66 (atom -> ID .)
+    RBRACK          reduce using rule 66 (atom -> ID .)
+    ASSIGN          reduce using rule 66 (atom -> ID .)
+    LPAREN          shift and go to state 44
+
+
+state 15
+
+    (6) statement -> SOURCEFORMULA boolexpr . SEMICOLON
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       shift and go to state 45
+    AND             shift and go to state 46
+    OR              shift and go to state 47
+    IMPL            shift and go to state 48
+    EQVI            shift and go to state 49
+
+
+state 16
+
+    (19) boolexpr -> NOT . boolexpr
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 50
+    atom                           shift and go to state 22
+
+state 17
+
+    (20) boolexpr -> PTRUE .
+
+    SEMICOLON       reduce using rule 20 (boolexpr -> PTRUE .)
+    AND             reduce using rule 20 (boolexpr -> PTRUE .)
+    OR              reduce using rule 20 (boolexpr -> PTRUE .)
+    IMPL            reduce using rule 20 (boolexpr -> PTRUE .)
+    EQVI            reduce using rule 20 (boolexpr -> PTRUE .)
+    RPAREN          reduce using rule 20 (boolexpr -> PTRUE .)
+    LBRACE          reduce using rule 20 (boolexpr -> PTRUE .)
+
+
+state 18
+
+    (21) boolexpr -> PFALSE .
+
+    SEMICOLON       reduce using rule 21 (boolexpr -> PFALSE .)
+    AND             reduce using rule 21 (boolexpr -> PFALSE .)
+    OR              reduce using rule 21 (boolexpr -> PFALSE .)
+    IMPL            reduce using rule 21 (boolexpr -> PFALSE .)
+    EQVI            reduce using rule 21 (boolexpr -> PFALSE .)
+    RPAREN          reduce using rule 21 (boolexpr -> PFALSE .)
+    LBRACE          reduce using rule 21 (boolexpr -> PFALSE .)
+
+
+state 19
+
+    (22) boolexpr -> EXISTS . LPAREN paramlist RPAREN boolexpr
+
+    LPAREN          shift and go to state 51
+
+
+state 20
+
+    (28) boolexpr -> LPAREN . boolexpr RPAREN
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 52
+    atom                           shift and go to state 22
+
+state 21
+
+    (23) boolexpr -> FORALL . LPAREN paramlist RPAREN boolexpr
+
+    LPAREN          shift and go to state 53
+
+
+state 22
+
+    (26) boolexpr -> atom .
+    (27) boolexpr -> atom . AT NUMBER
+
+    SEMICOLON       reduce using rule 26 (boolexpr -> atom .)
+    AND             reduce using rule 26 (boolexpr -> atom .)
+    OR              reduce using rule 26 (boolexpr -> atom .)
+    IMPL            reduce using rule 26 (boolexpr -> atom .)
+    EQVI            reduce using rule 26 (boolexpr -> atom .)
+    RPAREN          reduce using rule 26 (boolexpr -> atom .)
+    LBRACE          reduce using rule 26 (boolexpr -> atom .)
+    AT              shift and go to state 54
+
+
+state 23
+
+    (29) boolexpr -> LBRACK . numexpr GT numexpr RBRACK
+    (30) boolexpr -> LBRACK . numexpr LT numexpr RBRACK
+    (31) boolexpr -> LBRACK . numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> LBRACK . numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> LBRACK . numexpr EQ numexpr RBRACK
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    numexpr                        shift and go to state 55
+    atom                           shift and go to state 58
+
+state 24
+
+    (7) statement -> CTLTARGET CTLformula . SEMICOLON
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       shift and go to state 59
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+
+state 25
+
+    (38) CTLformula -> PTRUE .
+
+    SEMICOLON       reduce using rule 38 (CTLformula -> PTRUE .)
+    AND             reduce using rule 38 (CTLformula -> PTRUE .)
+    OR              reduce using rule 38 (CTLformula -> PTRUE .)
+    IMPL            reduce using rule 38 (CTLformula -> PTRUE .)
+    EQVI            reduce using rule 38 (CTLformula -> PTRUE .)
+    RPAREN          reduce using rule 38 (CTLformula -> PTRUE .)
+    U               reduce using rule 38 (CTLformula -> PTRUE .)
+    RBRACK          reduce using rule 38 (CTLformula -> PTRUE .)
+
+
+state 26
+
+    (39) CTLformula -> PFALSE .
+
+    SEMICOLON       reduce using rule 39 (CTLformula -> PFALSE .)
+    AND             reduce using rule 39 (CTLformula -> PFALSE .)
+    OR              reduce using rule 39 (CTLformula -> PFALSE .)
+    IMPL            reduce using rule 39 (CTLformula -> PFALSE .)
+    EQVI            reduce using rule 39 (CTLformula -> PFALSE .)
+    RPAREN          reduce using rule 39 (CTLformula -> PFALSE .)
+    U               reduce using rule 39 (CTLformula -> PFALSE .)
+    RBRACK          reduce using rule 39 (CTLformula -> PFALSE .)
+
+
+state 27
+
+    (40) CTLformula -> NOT . CTLformula
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 64
+    atom                           shift and go to state 28
+
+state 28
+
+    (41) CTLformula -> atom .
+
+    SEMICOLON       reduce using rule 41 (CTLformula -> atom .)
+    AND             reduce using rule 41 (CTLformula -> atom .)
+    OR              reduce using rule 41 (CTLformula -> atom .)
+    IMPL            reduce using rule 41 (CTLformula -> atom .)
+    EQVI            reduce using rule 41 (CTLformula -> atom .)
+    RPAREN          reduce using rule 41 (CTLformula -> atom .)
+    U               reduce using rule 41 (CTLformula -> atom .)
+    RBRACK          reduce using rule 41 (CTLformula -> atom .)
+
+
+state 29
+
+    (42) CTLformula -> LPAREN . CTLformula RPAREN
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 65
+    atom                           shift and go to state 28
+
+state 30
+
+    (43) CTLformula -> EX . CTLformula
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 66
+    atom                           shift and go to state 28
+
+state 31
+
+    (44) CTLformula -> EG . CTLformula
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 67
+    atom                           shift and go to state 28
+
+state 32
+
+    (45) CTLformula -> E . LBRACK CTLformula U CTLformula RBRACK
+
+    LBRACK          shift and go to state 68
+
+
+state 33
+
+    (46) CTLformula -> EF . CTLformula
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 69
+    atom                           shift and go to state 28
+
+state 34
+
+    (47) CTLformula -> AX . CTLformula
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 70
+    atom                           shift and go to state 28
+
+state 35
+
+    (48) CTLformula -> AG . CTLformula
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 71
+    atom                           shift and go to state 28
+
+state 36
+
+    (49) CTLformula -> A . LBRACK CTLformula U CTLformula RBRACK
+
+    LBRACK          shift and go to state 72
+
+
+state 37
+
+    (50) CTLformula -> AF . CTLformula
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 73
+    atom                           shift and go to state 28
+
+state 38
+
+    (82) statement -> TRANSITION ID . LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE
+    (83) statement -> TRANSITION ID . LPAREN RPAREN boolexpr LBRACE effects RBRACE
+
+    LPAREN          shift and go to state 74
+
+
+state 39
+
+    (3) statement -> ID EQ NUMBER . SEMICOLON
+
+    SEMICOLON       shift and go to state 75
+
+
+state 40
+
+    (4) statement -> TYPE ID EQ . setexpr SEMICOLON
+    (8) setexpr -> . LBRACK tnumexpr COMMA tnumexpr RBRACK
+    (9) setexpr -> . LBRACE stringlist RBRACE
+    (10) setexpr -> . ID
+
+    LBRACK          shift and go to state 78
+    LBRACE          shift and go to state 79
+    ID              shift and go to state 76
+
+    setexpr                        shift and go to state 77
+
+state 41
+
+    (5) statement -> SOURCE initlist SEMICOLON .
+
+    ID              reduce using rule 5 (statement -> SOURCE initlist SEMICOLON .)
+    TYPE            reduce using rule 5 (statement -> SOURCE initlist SEMICOLON .)
+    SOURCE          reduce using rule 5 (statement -> SOURCE initlist SEMICOLON .)
+    SOURCEFORMULA   reduce using rule 5 (statement -> SOURCE initlist SEMICOLON .)
+    CTLTARGET       reduce using rule 5 (statement -> SOURCE initlist SEMICOLON .)
+    TRANSITION      reduce using rule 5 (statement -> SOURCE initlist SEMICOLON .)
+    $end            reduce using rule 5 (statement -> SOURCE initlist SEMICOLON .)
+
+
+state 42
+
+    (69) initlist -> atom COMMA . initlist
+    (68) initlist -> . atom
+    (69) initlist -> . atom COMMA initlist
+    (70) initlist -> . atom EQ NUMBER
+    (71) initlist -> . atom EQ NUMBER COMMA initlist
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    ID              shift and go to state 14
+
+    atom                           shift and go to state 13
+    initlist                       shift and go to state 80
+
+state 43
+
+    (70) initlist -> atom EQ . NUMBER
+    (71) initlist -> atom EQ . NUMBER COMMA initlist
+
+    NUMBER          shift and go to state 81
+
+
+state 44
+
+    (67) atom -> ID LPAREN . termlist RPAREN
+    (63) termlist -> . term COMMA termlist
+    (64) termlist -> . term
+    (65) term -> . tnumexpr
+    (57) tnumexpr -> . LPAREN numexpr RPAREN
+    (58) tnumexpr -> . NUMBER
+    (59) tnumexpr -> . ID
+    (60) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (61) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (62) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 83
+    NUMBER          shift and go to state 87
+    ID              shift and go to state 82
+
+    termlist                       shift and go to state 84
+    term                           shift and go to state 85
+    tnumexpr                       shift and go to state 86
+
+state 45
+
+    (6) statement -> SOURCEFORMULA boolexpr SEMICOLON .
+
+    ID              reduce using rule 6 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+    TYPE            reduce using rule 6 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+    SOURCE          reduce using rule 6 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+    SOURCEFORMULA   reduce using rule 6 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+    CTLTARGET       reduce using rule 6 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+    TRANSITION      reduce using rule 6 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+    $end            reduce using rule 6 (statement -> SOURCEFORMULA boolexpr SEMICOLON .)
+
+
+state 46
+
+    (15) boolexpr -> boolexpr AND . boolexpr
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 88
+    atom                           shift and go to state 22
+
+state 47
+
+    (16) boolexpr -> boolexpr OR . boolexpr
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 89
+    atom                           shift and go to state 22
+
+state 48
+
+    (17) boolexpr -> boolexpr IMPL . boolexpr
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 90
+    atom                           shift and go to state 22
+
+state 49
+
+    (18) boolexpr -> boolexpr EQVI . boolexpr
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 91
+    atom                           shift and go to state 22
+
+state 50
+
+    (19) boolexpr -> NOT boolexpr .
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 19 (boolexpr -> NOT boolexpr .)
+    AND             reduce using rule 19 (boolexpr -> NOT boolexpr .)
+    OR              reduce using rule 19 (boolexpr -> NOT boolexpr .)
+    IMPL            reduce using rule 19 (boolexpr -> NOT boolexpr .)
+    EQVI            reduce using rule 19 (boolexpr -> NOT boolexpr .)
+    RPAREN          reduce using rule 19 (boolexpr -> NOT boolexpr .)
+    LBRACE          reduce using rule 19 (boolexpr -> NOT boolexpr .)
+
+  ! AND             [ shift and go to state 46 ]
+  ! OR              [ shift and go to state 47 ]
+  ! IMPL            [ shift and go to state 48 ]
+  ! EQVI            [ shift and go to state 49 ]
+
+
+state 51
+
+    (22) boolexpr -> EXISTS LPAREN . paramlist RPAREN boolexpr
+    (79) paramlist -> . param
+    (80) paramlist -> . param COMMA paramlist
+    (81) param -> . ID COLON setexpr
+
+    ID              shift and go to state 94
+
+    paramlist                      shift and go to state 92
+    param                          shift and go to state 93
+
+state 52
+
+    (28) boolexpr -> LPAREN boolexpr . RPAREN
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    RPAREN          shift and go to state 95
+    AND             shift and go to state 46
+    OR              shift and go to state 47
+    IMPL            shift and go to state 48
+    EQVI            shift and go to state 49
+
+
+state 53
+
+    (23) boolexpr -> FORALL LPAREN . paramlist RPAREN boolexpr
+    (79) paramlist -> . param
+    (80) paramlist -> . param COMMA paramlist
+    (81) param -> . ID COLON setexpr
+
+    ID              shift and go to state 94
+
+    paramlist                      shift and go to state 96
+    param                          shift and go to state 93
+
+state 54
+
+    (27) boolexpr -> atom AT . NUMBER
+
+    NUMBER          shift and go to state 97
+
+
+state 55
+
+    (29) boolexpr -> LBRACK numexpr . GT numexpr RBRACK
+    (30) boolexpr -> LBRACK numexpr . LT numexpr RBRACK
+    (31) boolexpr -> LBRACK numexpr . GEQ numexpr RBRACK
+    (32) boolexpr -> LBRACK numexpr . LEQ numexpr RBRACK
+    (33) boolexpr -> LBRACK numexpr . EQ numexpr RBRACK
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    GT              shift and go to state 98
+    LT              shift and go to state 99
+    GEQ             shift and go to state 100
+    LEQ             shift and go to state 101
+    EQ              shift and go to state 102
+    PLUS            shift and go to state 103
+    MINUS           shift and go to state 104
+    TIMES           shift and go to state 105
+
+
+state 56
+
+    (51) numexpr -> LPAREN . numexpr RPAREN
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    numexpr                        shift and go to state 106
+    atom                           shift and go to state 58
+
+state 57
+
+    (52) numexpr -> NUMBER .
+
+    GT              reduce using rule 52 (numexpr -> NUMBER .)
+    LT              reduce using rule 52 (numexpr -> NUMBER .)
+    GEQ             reduce using rule 52 (numexpr -> NUMBER .)
+    LEQ             reduce using rule 52 (numexpr -> NUMBER .)
+    EQ              reduce using rule 52 (numexpr -> NUMBER .)
+    PLUS            reduce using rule 52 (numexpr -> NUMBER .)
+    MINUS           reduce using rule 52 (numexpr -> NUMBER .)
+    TIMES           reduce using rule 52 (numexpr -> NUMBER .)
+    RPAREN          reduce using rule 52 (numexpr -> NUMBER .)
+    RBRACK          reduce using rule 52 (numexpr -> NUMBER .)
+    SEMICOLON       reduce using rule 52 (numexpr -> NUMBER .)
+
+
+state 58
+
+    (53) numexpr -> atom .
+
+    GT              reduce using rule 53 (numexpr -> atom .)
+    LT              reduce using rule 53 (numexpr -> atom .)
+    GEQ             reduce using rule 53 (numexpr -> atom .)
+    LEQ             reduce using rule 53 (numexpr -> atom .)
+    EQ              reduce using rule 53 (numexpr -> atom .)
+    PLUS            reduce using rule 53 (numexpr -> atom .)
+    MINUS           reduce using rule 53 (numexpr -> atom .)
+    TIMES           reduce using rule 53 (numexpr -> atom .)
+    RPAREN          reduce using rule 53 (numexpr -> atom .)
+    RBRACK          reduce using rule 53 (numexpr -> atom .)
+    SEMICOLON       reduce using rule 53 (numexpr -> atom .)
+
+
+state 59
+
+    (7) statement -> CTLTARGET CTLformula SEMICOLON .
+
+    ID              reduce using rule 7 (statement -> CTLTARGET CTLformula SEMICOLON .)
+    TYPE            reduce using rule 7 (statement -> CTLTARGET CTLformula SEMICOLON .)
+    SOURCE          reduce using rule 7 (statement -> CTLTARGET CTLformula SEMICOLON .)
+    SOURCEFORMULA   reduce using rule 7 (statement -> CTLTARGET CTLformula SEMICOLON .)
+    CTLTARGET       reduce using rule 7 (statement -> CTLTARGET CTLformula SEMICOLON .)
+    TRANSITION      reduce using rule 7 (statement -> CTLTARGET CTLformula SEMICOLON .)
+    $end            reduce using rule 7 (statement -> CTLTARGET CTLformula SEMICOLON .)
+
+
+state 60
+
+    (34) CTLformula -> CTLformula AND . CTLformula
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 107
+    atom                           shift and go to state 28
+
+state 61
+
+    (35) CTLformula -> CTLformula OR . CTLformula
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 108
+    atom                           shift and go to state 28
+
+state 62
+
+    (36) CTLformula -> CTLformula IMPL . CTLformula
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 109
+    atom                           shift and go to state 28
+
+state 63
+
+    (37) CTLformula -> CTLformula EQVI . CTLformula
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 110
+    atom                           shift and go to state 28
+
+state 64
+
+    (40) CTLformula -> NOT CTLformula .
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       reduce using rule 40 (CTLformula -> NOT CTLformula .)
+    AND             reduce using rule 40 (CTLformula -> NOT CTLformula .)
+    OR              reduce using rule 40 (CTLformula -> NOT CTLformula .)
+    IMPL            reduce using rule 40 (CTLformula -> NOT CTLformula .)
+    EQVI            reduce using rule 40 (CTLformula -> NOT CTLformula .)
+    RPAREN          reduce using rule 40 (CTLformula -> NOT CTLformula .)
+    U               reduce using rule 40 (CTLformula -> NOT CTLformula .)
+    RBRACK          reduce using rule 40 (CTLformula -> NOT CTLformula .)
+
+  ! AND             [ shift and go to state 60 ]
+  ! OR              [ shift and go to state 61 ]
+  ! IMPL            [ shift and go to state 62 ]
+  ! EQVI            [ shift and go to state 63 ]
+
+
+state 65
+
+    (42) CTLformula -> LPAREN CTLformula . RPAREN
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    RPAREN          shift and go to state 111
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+
+state 66
+
+    (43) CTLformula -> EX CTLformula .
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       reduce using rule 43 (CTLformula -> EX CTLformula .)
+    RPAREN          reduce using rule 43 (CTLformula -> EX CTLformula .)
+    U               reduce using rule 43 (CTLformula -> EX CTLformula .)
+    RBRACK          reduce using rule 43 (CTLformula -> EX CTLformula .)
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+  ! AND             [ reduce using rule 43 (CTLformula -> EX CTLformula .) ]
+  ! OR              [ reduce using rule 43 (CTLformula -> EX CTLformula .) ]
+  ! IMPL            [ reduce using rule 43 (CTLformula -> EX CTLformula .) ]
+  ! EQVI            [ reduce using rule 43 (CTLformula -> EX CTLformula .) ]
+
+
+state 67
+
+    (44) CTLformula -> EG CTLformula .
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       reduce using rule 44 (CTLformula -> EG CTLformula .)
+    RPAREN          reduce using rule 44 (CTLformula -> EG CTLformula .)
+    U               reduce using rule 44 (CTLformula -> EG CTLformula .)
+    RBRACK          reduce using rule 44 (CTLformula -> EG CTLformula .)
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+  ! AND             [ reduce using rule 44 (CTLformula -> EG CTLformula .) ]
+  ! OR              [ reduce using rule 44 (CTLformula -> EG CTLformula .) ]
+  ! IMPL            [ reduce using rule 44 (CTLformula -> EG CTLformula .) ]
+  ! EQVI            [ reduce using rule 44 (CTLformula -> EG CTLformula .) ]
+
+
+state 68
+
+    (45) CTLformula -> E LBRACK . CTLformula U CTLformula RBRACK
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 112
+    atom                           shift and go to state 28
+
+state 69
+
+    (46) CTLformula -> EF CTLformula .
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       reduce using rule 46 (CTLformula -> EF CTLformula .)
+    RPAREN          reduce using rule 46 (CTLformula -> EF CTLformula .)
+    U               reduce using rule 46 (CTLformula -> EF CTLformula .)
+    RBRACK          reduce using rule 46 (CTLformula -> EF CTLformula .)
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+  ! AND             [ reduce using rule 46 (CTLformula -> EF CTLformula .) ]
+  ! OR              [ reduce using rule 46 (CTLformula -> EF CTLformula .) ]
+  ! IMPL            [ reduce using rule 46 (CTLformula -> EF CTLformula .) ]
+  ! EQVI            [ reduce using rule 46 (CTLformula -> EF CTLformula .) ]
+
+
+state 70
+
+    (47) CTLformula -> AX CTLformula .
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       reduce using rule 47 (CTLformula -> AX CTLformula .)
+    RPAREN          reduce using rule 47 (CTLformula -> AX CTLformula .)
+    U               reduce using rule 47 (CTLformula -> AX CTLformula .)
+    RBRACK          reduce using rule 47 (CTLformula -> AX CTLformula .)
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+  ! AND             [ reduce using rule 47 (CTLformula -> AX CTLformula .) ]
+  ! OR              [ reduce using rule 47 (CTLformula -> AX CTLformula .) ]
+  ! IMPL            [ reduce using rule 47 (CTLformula -> AX CTLformula .) ]
+  ! EQVI            [ reduce using rule 47 (CTLformula -> AX CTLformula .) ]
+
+
+state 71
+
+    (48) CTLformula -> AG CTLformula .
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       reduce using rule 48 (CTLformula -> AG CTLformula .)
+    RPAREN          reduce using rule 48 (CTLformula -> AG CTLformula .)
+    U               reduce using rule 48 (CTLformula -> AG CTLformula .)
+    RBRACK          reduce using rule 48 (CTLformula -> AG CTLformula .)
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+  ! AND             [ reduce using rule 48 (CTLformula -> AG CTLformula .) ]
+  ! OR              [ reduce using rule 48 (CTLformula -> AG CTLformula .) ]
+  ! IMPL            [ reduce using rule 48 (CTLformula -> AG CTLformula .) ]
+  ! EQVI            [ reduce using rule 48 (CTLformula -> AG CTLformula .) ]
+
+
+state 72
+
+    (49) CTLformula -> A LBRACK . CTLformula U CTLformula RBRACK
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 113
+    atom                           shift and go to state 28
+
+state 73
+
+    (50) CTLformula -> AF CTLformula .
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       reduce using rule 50 (CTLformula -> AF CTLformula .)
+    RPAREN          reduce using rule 50 (CTLformula -> AF CTLformula .)
+    U               reduce using rule 50 (CTLformula -> AF CTLformula .)
+    RBRACK          reduce using rule 50 (CTLformula -> AF CTLformula .)
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+  ! AND             [ reduce using rule 50 (CTLformula -> AF CTLformula .) ]
+  ! OR              [ reduce using rule 50 (CTLformula -> AF CTLformula .) ]
+  ! IMPL            [ reduce using rule 50 (CTLformula -> AF CTLformula .) ]
+  ! EQVI            [ reduce using rule 50 (CTLformula -> AF CTLformula .) ]
+
+
+state 74
+
+    (82) statement -> TRANSITION ID LPAREN . paramlist RPAREN boolexpr LBRACE effects RBRACE
+    (83) statement -> TRANSITION ID LPAREN . RPAREN boolexpr LBRACE effects RBRACE
+    (79) paramlist -> . param
+    (80) paramlist -> . param COMMA paramlist
+    (81) param -> . ID COLON setexpr
+
+    RPAREN          shift and go to state 115
+    ID              shift and go to state 94
+
+    paramlist                      shift and go to state 114
+    param                          shift and go to state 93
+
+state 75
+
+    (3) statement -> ID EQ NUMBER SEMICOLON .
+
+    ID              reduce using rule 3 (statement -> ID EQ NUMBER SEMICOLON .)
+    TYPE            reduce using rule 3 (statement -> ID EQ NUMBER SEMICOLON .)
+    SOURCE          reduce using rule 3 (statement -> ID EQ NUMBER SEMICOLON .)
+    SOURCEFORMULA   reduce using rule 3 (statement -> ID EQ NUMBER SEMICOLON .)
+    CTLTARGET       reduce using rule 3 (statement -> ID EQ NUMBER SEMICOLON .)
+    TRANSITION      reduce using rule 3 (statement -> ID EQ NUMBER SEMICOLON .)
+    $end            reduce using rule 3 (statement -> ID EQ NUMBER SEMICOLON .)
+
+
+state 76
+
+    (10) setexpr -> ID .
+
+    SEMICOLON       reduce using rule 10 (setexpr -> ID .)
+    COMMA           reduce using rule 10 (setexpr -> ID .)
+    RPAREN          reduce using rule 10 (setexpr -> ID .)
+
+
+state 77
+
+    (4) statement -> TYPE ID EQ setexpr . SEMICOLON
+
+    SEMICOLON       shift and go to state 116
+
+
+state 78
+
+    (8) setexpr -> LBRACK . tnumexpr COMMA tnumexpr RBRACK
+    (57) tnumexpr -> . LPAREN numexpr RPAREN
+    (58) tnumexpr -> . NUMBER
+    (59) tnumexpr -> . ID
+    (60) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (61) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (62) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 83
+    NUMBER          shift and go to state 87
+    ID              shift and go to state 82
+
+    tnumexpr                       shift and go to state 117
+
+state 79
+
+    (9) setexpr -> LBRACE . stringlist RBRACE
+    (11) stringlist -> . enum
+    (14) stringlist -> . enum COMMA stringlist
+    (12) enum -> . ID
+    (13) enum -> . NUMBER
+
+    ID              shift and go to state 120
+    NUMBER          shift and go to state 121
+
+    stringlist                     shift and go to state 118
+    enum                           shift and go to state 119
+
+state 80
+
+    (69) initlist -> atom COMMA initlist .
+
+    SEMICOLON       reduce using rule 69 (initlist -> atom COMMA initlist .)
+
+
+state 81
+
+    (70) initlist -> atom EQ NUMBER .
+    (71) initlist -> atom EQ NUMBER . COMMA initlist
+
+    SEMICOLON       reduce using rule 70 (initlist -> atom EQ NUMBER .)
+    COMMA           shift and go to state 122
+
+
+state 82
+
+    (59) tnumexpr -> ID .
+
+    PLUS            reduce using rule 59 (tnumexpr -> ID .)
+    MINUS           reduce using rule 59 (tnumexpr -> ID .)
+    TIMES           reduce using rule 59 (tnumexpr -> ID .)
+    COMMA           reduce using rule 59 (tnumexpr -> ID .)
+    RPAREN          reduce using rule 59 (tnumexpr -> ID .)
+    RBRACK          reduce using rule 59 (tnumexpr -> ID .)
+
+
+state 83
+
+    (57) tnumexpr -> LPAREN . numexpr RPAREN
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    numexpr                        shift and go to state 123
+    atom                           shift and go to state 58
+
+state 84
+
+    (67) atom -> ID LPAREN termlist . RPAREN
+
+    RPAREN          shift and go to state 124
+
+
+state 85
+
+    (63) termlist -> term . COMMA termlist
+    (64) termlist -> term .
+
+    COMMA           shift and go to state 125
+    RPAREN          reduce using rule 64 (termlist -> term .)
+
+
+state 86
+
+    (65) term -> tnumexpr .
+    (60) tnumexpr -> tnumexpr . PLUS tnumexpr
+    (61) tnumexpr -> tnumexpr . MINUS tnumexpr
+    (62) tnumexpr -> tnumexpr . TIMES tnumexpr
+
+    COMMA           reduce using rule 65 (term -> tnumexpr .)
+    RPAREN          reduce using rule 65 (term -> tnumexpr .)
+    PLUS            shift and go to state 126
+    MINUS           shift and go to state 127
+    TIMES           shift and go to state 128
+
+
+state 87
+
+    (58) tnumexpr -> NUMBER .
+
+    PLUS            reduce using rule 58 (tnumexpr -> NUMBER .)
+    MINUS           reduce using rule 58 (tnumexpr -> NUMBER .)
+    TIMES           reduce using rule 58 (tnumexpr -> NUMBER .)
+    COMMA           reduce using rule 58 (tnumexpr -> NUMBER .)
+    RPAREN          reduce using rule 58 (tnumexpr -> NUMBER .)
+    RBRACK          reduce using rule 58 (tnumexpr -> NUMBER .)
+
+
+state 88
+
+    (15) boolexpr -> boolexpr AND boolexpr .
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 15 (boolexpr -> boolexpr AND boolexpr .)
+    AND             reduce using rule 15 (boolexpr -> boolexpr AND boolexpr .)
+    OR              reduce using rule 15 (boolexpr -> boolexpr AND boolexpr .)
+    IMPL            reduce using rule 15 (boolexpr -> boolexpr AND boolexpr .)
+    EQVI            reduce using rule 15 (boolexpr -> boolexpr AND boolexpr .)
+    RPAREN          reduce using rule 15 (boolexpr -> boolexpr AND boolexpr .)
+    LBRACE          reduce using rule 15 (boolexpr -> boolexpr AND boolexpr .)
+
+  ! AND             [ shift and go to state 46 ]
+  ! OR              [ shift and go to state 47 ]
+  ! IMPL            [ shift and go to state 48 ]
+  ! EQVI            [ shift and go to state 49 ]
+
+
+state 89
+
+    (16) boolexpr -> boolexpr OR boolexpr .
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 16 (boolexpr -> boolexpr OR boolexpr .)
+    AND             reduce using rule 16 (boolexpr -> boolexpr OR boolexpr .)
+    OR              reduce using rule 16 (boolexpr -> boolexpr OR boolexpr .)
+    IMPL            reduce using rule 16 (boolexpr -> boolexpr OR boolexpr .)
+    EQVI            reduce using rule 16 (boolexpr -> boolexpr OR boolexpr .)
+    RPAREN          reduce using rule 16 (boolexpr -> boolexpr OR boolexpr .)
+    LBRACE          reduce using rule 16 (boolexpr -> boolexpr OR boolexpr .)
+
+  ! AND             [ shift and go to state 46 ]
+  ! OR              [ shift and go to state 47 ]
+  ! IMPL            [ shift and go to state 48 ]
+  ! EQVI            [ shift and go to state 49 ]
+
+
+state 90
+
+    (17) boolexpr -> boolexpr IMPL boolexpr .
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 17 (boolexpr -> boolexpr IMPL boolexpr .)
+    EQVI            reduce using rule 17 (boolexpr -> boolexpr IMPL boolexpr .)
+    RPAREN          reduce using rule 17 (boolexpr -> boolexpr IMPL boolexpr .)
+    LBRACE          reduce using rule 17 (boolexpr -> boolexpr IMPL boolexpr .)
+    AND             shift and go to state 46
+    OR              shift and go to state 47
+    IMPL            shift and go to state 48
+
+  ! AND             [ reduce using rule 17 (boolexpr -> boolexpr IMPL boolexpr .) ]
+  ! OR              [ reduce using rule 17 (boolexpr -> boolexpr IMPL boolexpr .) ]
+  ! IMPL            [ reduce using rule 17 (boolexpr -> boolexpr IMPL boolexpr .) ]
+  ! EQVI            [ shift and go to state 49 ]
+
+
+state 91
+
+    (18) boolexpr -> boolexpr EQVI boolexpr .
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 18 (boolexpr -> boolexpr EQVI boolexpr .)
+    RPAREN          reduce using rule 18 (boolexpr -> boolexpr EQVI boolexpr .)
+    LBRACE          reduce using rule 18 (boolexpr -> boolexpr EQVI boolexpr .)
+    AND             shift and go to state 46
+    OR              shift and go to state 47
+    IMPL            shift and go to state 48
+    EQVI            shift and go to state 49
+
+  ! AND             [ reduce using rule 18 (boolexpr -> boolexpr EQVI boolexpr .) ]
+  ! OR              [ reduce using rule 18 (boolexpr -> boolexpr EQVI boolexpr .) ]
+  ! IMPL            [ reduce using rule 18 (boolexpr -> boolexpr EQVI boolexpr .) ]
+  ! EQVI            [ reduce using rule 18 (boolexpr -> boolexpr EQVI boolexpr .) ]
+
+
+state 92
+
+    (22) boolexpr -> EXISTS LPAREN paramlist . RPAREN boolexpr
+
+    RPAREN          shift and go to state 129
+
+
+state 93
+
+    (79) paramlist -> param .
+    (80) paramlist -> param . COMMA paramlist
+
+    RPAREN          reduce using rule 79 (paramlist -> param .)
+    COMMA           shift and go to state 130
+
+
+state 94
+
+    (81) param -> ID . COLON setexpr
+
+    COLON           shift and go to state 131
+
+
+state 95
+
+    (28) boolexpr -> LPAREN boolexpr RPAREN .
+
+    SEMICOLON       reduce using rule 28 (boolexpr -> LPAREN boolexpr RPAREN .)
+    AND             reduce using rule 28 (boolexpr -> LPAREN boolexpr RPAREN .)
+    OR              reduce using rule 28 (boolexpr -> LPAREN boolexpr RPAREN .)
+    IMPL            reduce using rule 28 (boolexpr -> LPAREN boolexpr RPAREN .)
+    EQVI            reduce using rule 28 (boolexpr -> LPAREN boolexpr RPAREN .)
+    RPAREN          reduce using rule 28 (boolexpr -> LPAREN boolexpr RPAREN .)
+    LBRACE          reduce using rule 28 (boolexpr -> LPAREN boolexpr RPAREN .)
+
+
+state 96
+
+    (23) boolexpr -> FORALL LPAREN paramlist . RPAREN boolexpr
+
+    RPAREN          shift and go to state 132
+
+
+state 97
+
+    (27) boolexpr -> atom AT NUMBER .
+
+    SEMICOLON       reduce using rule 27 (boolexpr -> atom AT NUMBER .)
+    AND             reduce using rule 27 (boolexpr -> atom AT NUMBER .)
+    OR              reduce using rule 27 (boolexpr -> atom AT NUMBER .)
+    IMPL            reduce using rule 27 (boolexpr -> atom AT NUMBER .)
+    EQVI            reduce using rule 27 (boolexpr -> atom AT NUMBER .)
+    RPAREN          reduce using rule 27 (boolexpr -> atom AT NUMBER .)
+    LBRACE          reduce using rule 27 (boolexpr -> atom AT NUMBER .)
+
+
+state 98
+
+    (29) boolexpr -> LBRACK numexpr GT . numexpr RBRACK
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    numexpr                        shift and go to state 133
+    atom                           shift and go to state 58
+
+state 99
+
+    (30) boolexpr -> LBRACK numexpr LT . numexpr RBRACK
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    numexpr                        shift and go to state 134
+    atom                           shift and go to state 58
+
+state 100
+
+    (31) boolexpr -> LBRACK numexpr GEQ . numexpr RBRACK
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    numexpr                        shift and go to state 135
+    atom                           shift and go to state 58
+
+state 101
+
+    (32) boolexpr -> LBRACK numexpr LEQ . numexpr RBRACK
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    numexpr                        shift and go to state 136
+    atom                           shift and go to state 58
+
+state 102
+
+    (33) boolexpr -> LBRACK numexpr EQ . numexpr RBRACK
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    numexpr                        shift and go to state 137
+    atom                           shift and go to state 58
+
+state 103
+
+    (54) numexpr -> numexpr PLUS . numexpr
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    numexpr                        shift and go to state 138
+    atom                           shift and go to state 58
+
+state 104
+
+    (55) numexpr -> numexpr MINUS . numexpr
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    numexpr                        shift and go to state 139
+    atom                           shift and go to state 58
+
+state 105
+
+    (56) numexpr -> numexpr TIMES . numexpr
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    numexpr                        shift and go to state 140
+    atom                           shift and go to state 58
+
+state 106
+
+    (51) numexpr -> LPAREN numexpr . RPAREN
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    RPAREN          shift and go to state 141
+    PLUS            shift and go to state 103
+    MINUS           shift and go to state 104
+    TIMES           shift and go to state 105
+
+
+state 107
+
+    (34) CTLformula -> CTLformula AND CTLformula .
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       reduce using rule 34 (CTLformula -> CTLformula AND CTLformula .)
+    AND             reduce using rule 34 (CTLformula -> CTLformula AND CTLformula .)
+    OR              reduce using rule 34 (CTLformula -> CTLformula AND CTLformula .)
+    IMPL            reduce using rule 34 (CTLformula -> CTLformula AND CTLformula .)
+    EQVI            reduce using rule 34 (CTLformula -> CTLformula AND CTLformula .)
+    RPAREN          reduce using rule 34 (CTLformula -> CTLformula AND CTLformula .)
+    U               reduce using rule 34 (CTLformula -> CTLformula AND CTLformula .)
+    RBRACK          reduce using rule 34 (CTLformula -> CTLformula AND CTLformula .)
+
+  ! AND             [ shift and go to state 60 ]
+  ! OR              [ shift and go to state 61 ]
+  ! IMPL            [ shift and go to state 62 ]
+  ! EQVI            [ shift and go to state 63 ]
+
+
+state 108
+
+    (35) CTLformula -> CTLformula OR CTLformula .
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       reduce using rule 35 (CTLformula -> CTLformula OR CTLformula .)
+    AND             reduce using rule 35 (CTLformula -> CTLformula OR CTLformula .)
+    OR              reduce using rule 35 (CTLformula -> CTLformula OR CTLformula .)
+    IMPL            reduce using rule 35 (CTLformula -> CTLformula OR CTLformula .)
+    EQVI            reduce using rule 35 (CTLformula -> CTLformula OR CTLformula .)
+    RPAREN          reduce using rule 35 (CTLformula -> CTLformula OR CTLformula .)
+    U               reduce using rule 35 (CTLformula -> CTLformula OR CTLformula .)
+    RBRACK          reduce using rule 35 (CTLformula -> CTLformula OR CTLformula .)
+
+  ! AND             [ shift and go to state 60 ]
+  ! OR              [ shift and go to state 61 ]
+  ! IMPL            [ shift and go to state 62 ]
+  ! EQVI            [ shift and go to state 63 ]
+
+
+state 109
+
+    (36) CTLformula -> CTLformula IMPL CTLformula .
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       reduce using rule 36 (CTLformula -> CTLformula IMPL CTLformula .)
+    EQVI            reduce using rule 36 (CTLformula -> CTLformula IMPL CTLformula .)
+    RPAREN          reduce using rule 36 (CTLformula -> CTLformula IMPL CTLformula .)
+    U               reduce using rule 36 (CTLformula -> CTLformula IMPL CTLformula .)
+    RBRACK          reduce using rule 36 (CTLformula -> CTLformula IMPL CTLformula .)
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+
+  ! AND             [ reduce using rule 36 (CTLformula -> CTLformula IMPL CTLformula .) ]
+  ! OR              [ reduce using rule 36 (CTLformula -> CTLformula IMPL CTLformula .) ]
+  ! IMPL            [ reduce using rule 36 (CTLformula -> CTLformula IMPL CTLformula .) ]
+  ! EQVI            [ shift and go to state 63 ]
+
+
+state 110
+
+    (37) CTLformula -> CTLformula EQVI CTLformula .
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    SEMICOLON       reduce using rule 37 (CTLformula -> CTLformula EQVI CTLformula .)
+    RPAREN          reduce using rule 37 (CTLformula -> CTLformula EQVI CTLformula .)
+    U               reduce using rule 37 (CTLformula -> CTLformula EQVI CTLformula .)
+    RBRACK          reduce using rule 37 (CTLformula -> CTLformula EQVI CTLformula .)
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+  ! AND             [ reduce using rule 37 (CTLformula -> CTLformula EQVI CTLformula .) ]
+  ! OR              [ reduce using rule 37 (CTLformula -> CTLformula EQVI CTLformula .) ]
+  ! IMPL            [ reduce using rule 37 (CTLformula -> CTLformula EQVI CTLformula .) ]
+  ! EQVI            [ reduce using rule 37 (CTLformula -> CTLformula EQVI CTLformula .) ]
+
+
+state 111
+
+    (42) CTLformula -> LPAREN CTLformula RPAREN .
+
+    SEMICOLON       reduce using rule 42 (CTLformula -> LPAREN CTLformula RPAREN .)
+    AND             reduce using rule 42 (CTLformula -> LPAREN CTLformula RPAREN .)
+    OR              reduce using rule 42 (CTLformula -> LPAREN CTLformula RPAREN .)
+    IMPL            reduce using rule 42 (CTLformula -> LPAREN CTLformula RPAREN .)
+    EQVI            reduce using rule 42 (CTLformula -> LPAREN CTLformula RPAREN .)
+    RPAREN          reduce using rule 42 (CTLformula -> LPAREN CTLformula RPAREN .)
+    U               reduce using rule 42 (CTLformula -> LPAREN CTLformula RPAREN .)
+    RBRACK          reduce using rule 42 (CTLformula -> LPAREN CTLformula RPAREN .)
+
+
+state 112
+
+    (45) CTLformula -> E LBRACK CTLformula . U CTLformula RBRACK
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    U               shift and go to state 142
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+
+state 113
+
+    (49) CTLformula -> A LBRACK CTLformula . U CTLformula RBRACK
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    U               shift and go to state 143
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+
+state 114
+
+    (82) statement -> TRANSITION ID LPAREN paramlist . RPAREN boolexpr LBRACE effects RBRACE
+
+    RPAREN          shift and go to state 144
+
+
+state 115
+
+    (83) statement -> TRANSITION ID LPAREN RPAREN . boolexpr LBRACE effects RBRACE
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 145
+    atom                           shift and go to state 22
+
+state 116
+
+    (4) statement -> TYPE ID EQ setexpr SEMICOLON .
+
+    ID              reduce using rule 4 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+    TYPE            reduce using rule 4 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+    SOURCE          reduce using rule 4 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+    SOURCEFORMULA   reduce using rule 4 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+    CTLTARGET       reduce using rule 4 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+    TRANSITION      reduce using rule 4 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+    $end            reduce using rule 4 (statement -> TYPE ID EQ setexpr SEMICOLON .)
+
+
+state 117
+
+    (8) setexpr -> LBRACK tnumexpr . COMMA tnumexpr RBRACK
+    (60) tnumexpr -> tnumexpr . PLUS tnumexpr
+    (61) tnumexpr -> tnumexpr . MINUS tnumexpr
+    (62) tnumexpr -> tnumexpr . TIMES tnumexpr
+
+    COMMA           shift and go to state 146
+    PLUS            shift and go to state 126
+    MINUS           shift and go to state 127
+    TIMES           shift and go to state 128
+
+
+state 118
+
+    (9) setexpr -> LBRACE stringlist . RBRACE
+
+    RBRACE          shift and go to state 147
+
+
+state 119
+
+    (11) stringlist -> enum .
+    (14) stringlist -> enum . COMMA stringlist
+
+    RBRACE          reduce using rule 11 (stringlist -> enum .)
+    COMMA           shift and go to state 148
+
+
+state 120
+
+    (12) enum -> ID .
+
+    COMMA           reduce using rule 12 (enum -> ID .)
+    RBRACE          reduce using rule 12 (enum -> ID .)
+
+
+state 121
+
+    (13) enum -> NUMBER .
+
+    COMMA           reduce using rule 13 (enum -> NUMBER .)
+    RBRACE          reduce using rule 13 (enum -> NUMBER .)
+
+
+state 122
+
+    (71) initlist -> atom EQ NUMBER COMMA . initlist
+    (68) initlist -> . atom
+    (69) initlist -> . atom COMMA initlist
+    (70) initlist -> . atom EQ NUMBER
+    (71) initlist -> . atom EQ NUMBER COMMA initlist
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    ID              shift and go to state 14
+
+    atom                           shift and go to state 13
+    initlist                       shift and go to state 149
+
+state 123
+
+    (57) tnumexpr -> LPAREN numexpr . RPAREN
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    RPAREN          shift and go to state 150
+    PLUS            shift and go to state 103
+    MINUS           shift and go to state 104
+    TIMES           shift and go to state 105
+
+
+state 124
+
+    (67) atom -> ID LPAREN termlist RPAREN .
+
+    COMMA           reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    EQ              reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    SEMICOLON       reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    AT              reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    AND             reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    OR              reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    IMPL            reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    EQVI            reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    RPAREN          reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    LBRACE          reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    GT              reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    LT              reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    GEQ             reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    LEQ             reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    PLUS            reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    MINUS           reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    TIMES           reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    U               reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    RBRACK          reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+    ASSIGN          reduce using rule 67 (atom -> ID LPAREN termlist RPAREN .)
+
+
+state 125
+
+    (63) termlist -> term COMMA . termlist
+    (63) termlist -> . term COMMA termlist
+    (64) termlist -> . term
+    (65) term -> . tnumexpr
+    (57) tnumexpr -> . LPAREN numexpr RPAREN
+    (58) tnumexpr -> . NUMBER
+    (59) tnumexpr -> . ID
+    (60) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (61) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (62) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 83
+    NUMBER          shift and go to state 87
+    ID              shift and go to state 82
+
+    term                           shift and go to state 85
+    termlist                       shift and go to state 151
+    tnumexpr                       shift and go to state 86
+
+state 126
+
+    (60) tnumexpr -> tnumexpr PLUS . tnumexpr
+    (57) tnumexpr -> . LPAREN numexpr RPAREN
+    (58) tnumexpr -> . NUMBER
+    (59) tnumexpr -> . ID
+    (60) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (61) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (62) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 83
+    NUMBER          shift and go to state 87
+    ID              shift and go to state 82
+
+    tnumexpr                       shift and go to state 152
+
+state 127
+
+    (61) tnumexpr -> tnumexpr MINUS . tnumexpr
+    (57) tnumexpr -> . LPAREN numexpr RPAREN
+    (58) tnumexpr -> . NUMBER
+    (59) tnumexpr -> . ID
+    (60) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (61) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (62) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 83
+    NUMBER          shift and go to state 87
+    ID              shift and go to state 82
+
+    tnumexpr                       shift and go to state 153
+
+state 128
+
+    (62) tnumexpr -> tnumexpr TIMES . tnumexpr
+    (57) tnumexpr -> . LPAREN numexpr RPAREN
+    (58) tnumexpr -> . NUMBER
+    (59) tnumexpr -> . ID
+    (60) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (61) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (62) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 83
+    NUMBER          shift and go to state 87
+    ID              shift and go to state 82
+
+    tnumexpr                       shift and go to state 154
+
+state 129
+
+    (22) boolexpr -> EXISTS LPAREN paramlist RPAREN . boolexpr
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 155
+    atom                           shift and go to state 22
+
+state 130
+
+    (80) paramlist -> param COMMA . paramlist
+    (79) paramlist -> . param
+    (80) paramlist -> . param COMMA paramlist
+    (81) param -> . ID COLON setexpr
+
+    ID              shift and go to state 94
+
+    param                          shift and go to state 93
+    paramlist                      shift and go to state 156
+
+state 131
+
+    (81) param -> ID COLON . setexpr
+    (8) setexpr -> . LBRACK tnumexpr COMMA tnumexpr RBRACK
+    (9) setexpr -> . LBRACE stringlist RBRACE
+    (10) setexpr -> . ID
+
+    LBRACK          shift and go to state 78
+    LBRACE          shift and go to state 79
+    ID              shift and go to state 76
+
+    setexpr                        shift and go to state 157
+
+state 132
+
+    (23) boolexpr -> FORALL LPAREN paramlist RPAREN . boolexpr
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 158
+    atom                           shift and go to state 22
+
+state 133
+
+    (29) boolexpr -> LBRACK numexpr GT numexpr . RBRACK
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    RBRACK          shift and go to state 159
+    PLUS            shift and go to state 103
+    MINUS           shift and go to state 104
+    TIMES           shift and go to state 105
+
+
+state 134
+
+    (30) boolexpr -> LBRACK numexpr LT numexpr . RBRACK
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    RBRACK          shift and go to state 160
+    PLUS            shift and go to state 103
+    MINUS           shift and go to state 104
+    TIMES           shift and go to state 105
+
+
+state 135
+
+    (31) boolexpr -> LBRACK numexpr GEQ numexpr . RBRACK
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    RBRACK          shift and go to state 161
+    PLUS            shift and go to state 103
+    MINUS           shift and go to state 104
+    TIMES           shift and go to state 105
+
+
+state 136
+
+    (32) boolexpr -> LBRACK numexpr LEQ numexpr . RBRACK
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    RBRACK          shift and go to state 162
+    PLUS            shift and go to state 103
+    MINUS           shift and go to state 104
+    TIMES           shift and go to state 105
+
+
+state 137
+
+    (33) boolexpr -> LBRACK numexpr EQ numexpr . RBRACK
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    RBRACK          shift and go to state 163
+    PLUS            shift and go to state 103
+    MINUS           shift and go to state 104
+    TIMES           shift and go to state 105
+
+
+state 138
+
+    (54) numexpr -> numexpr PLUS numexpr .
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    GT              reduce using rule 54 (numexpr -> numexpr PLUS numexpr .)
+    LT              reduce using rule 54 (numexpr -> numexpr PLUS numexpr .)
+    GEQ             reduce using rule 54 (numexpr -> numexpr PLUS numexpr .)
+    LEQ             reduce using rule 54 (numexpr -> numexpr PLUS numexpr .)
+    EQ              reduce using rule 54 (numexpr -> numexpr PLUS numexpr .)
+    PLUS            reduce using rule 54 (numexpr -> numexpr PLUS numexpr .)
+    MINUS           reduce using rule 54 (numexpr -> numexpr PLUS numexpr .)
+    RPAREN          reduce using rule 54 (numexpr -> numexpr PLUS numexpr .)
+    RBRACK          reduce using rule 54 (numexpr -> numexpr PLUS numexpr .)
+    SEMICOLON       reduce using rule 54 (numexpr -> numexpr PLUS numexpr .)
+    TIMES           shift and go to state 105
+
+  ! TIMES           [ reduce using rule 54 (numexpr -> numexpr PLUS numexpr .) ]
+  ! PLUS            [ shift and go to state 103 ]
+  ! MINUS           [ shift and go to state 104 ]
+
+
+state 139
+
+    (55) numexpr -> numexpr MINUS numexpr .
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    GT              reduce using rule 55 (numexpr -> numexpr MINUS numexpr .)
+    LT              reduce using rule 55 (numexpr -> numexpr MINUS numexpr .)
+    GEQ             reduce using rule 55 (numexpr -> numexpr MINUS numexpr .)
+    LEQ             reduce using rule 55 (numexpr -> numexpr MINUS numexpr .)
+    EQ              reduce using rule 55 (numexpr -> numexpr MINUS numexpr .)
+    PLUS            reduce using rule 55 (numexpr -> numexpr MINUS numexpr .)
+    MINUS           reduce using rule 55 (numexpr -> numexpr MINUS numexpr .)
+    RPAREN          reduce using rule 55 (numexpr -> numexpr MINUS numexpr .)
+    RBRACK          reduce using rule 55 (numexpr -> numexpr MINUS numexpr .)
+    SEMICOLON       reduce using rule 55 (numexpr -> numexpr MINUS numexpr .)
+    TIMES           shift and go to state 105
+
+  ! TIMES           [ reduce using rule 55 (numexpr -> numexpr MINUS numexpr .) ]
+  ! PLUS            [ shift and go to state 103 ]
+  ! MINUS           [ shift and go to state 104 ]
+
+
+state 140
+
+    (56) numexpr -> numexpr TIMES numexpr .
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    GT              reduce using rule 56 (numexpr -> numexpr TIMES numexpr .)
+    LT              reduce using rule 56 (numexpr -> numexpr TIMES numexpr .)
+    GEQ             reduce using rule 56 (numexpr -> numexpr TIMES numexpr .)
+    LEQ             reduce using rule 56 (numexpr -> numexpr TIMES numexpr .)
+    EQ              reduce using rule 56 (numexpr -> numexpr TIMES numexpr .)
+    PLUS            reduce using rule 56 (numexpr -> numexpr TIMES numexpr .)
+    MINUS           reduce using rule 56 (numexpr -> numexpr TIMES numexpr .)
+    TIMES           reduce using rule 56 (numexpr -> numexpr TIMES numexpr .)
+    RPAREN          reduce using rule 56 (numexpr -> numexpr TIMES numexpr .)
+    RBRACK          reduce using rule 56 (numexpr -> numexpr TIMES numexpr .)
+    SEMICOLON       reduce using rule 56 (numexpr -> numexpr TIMES numexpr .)
+
+  ! PLUS            [ shift and go to state 103 ]
+  ! MINUS           [ shift and go to state 104 ]
+  ! TIMES           [ shift and go to state 105 ]
+
+
+state 141
+
+    (51) numexpr -> LPAREN numexpr RPAREN .
+
+    GT              reduce using rule 51 (numexpr -> LPAREN numexpr RPAREN .)
+    LT              reduce using rule 51 (numexpr -> LPAREN numexpr RPAREN .)
+    GEQ             reduce using rule 51 (numexpr -> LPAREN numexpr RPAREN .)
+    LEQ             reduce using rule 51 (numexpr -> LPAREN numexpr RPAREN .)
+    EQ              reduce using rule 51 (numexpr -> LPAREN numexpr RPAREN .)
+    PLUS            reduce using rule 51 (numexpr -> LPAREN numexpr RPAREN .)
+    MINUS           reduce using rule 51 (numexpr -> LPAREN numexpr RPAREN .)
+    TIMES           reduce using rule 51 (numexpr -> LPAREN numexpr RPAREN .)
+    RPAREN          reduce using rule 51 (numexpr -> LPAREN numexpr RPAREN .)
+    RBRACK          reduce using rule 51 (numexpr -> LPAREN numexpr RPAREN .)
+    SEMICOLON       reduce using rule 51 (numexpr -> LPAREN numexpr RPAREN .)
+
+
+state 142
+
+    (45) CTLformula -> E LBRACK CTLformula U . CTLformula RBRACK
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 164
+    atom                           shift and go to state 28
+
+state 143
+
+    (49) CTLformula -> A LBRACK CTLformula U . CTLformula RBRACK
+    (34) CTLformula -> . CTLformula AND CTLformula
+    (35) CTLformula -> . CTLformula OR CTLformula
+    (36) CTLformula -> . CTLformula IMPL CTLformula
+    (37) CTLformula -> . CTLformula EQVI CTLformula
+    (38) CTLformula -> . PTRUE
+    (39) CTLformula -> . PFALSE
+    (40) CTLformula -> . NOT CTLformula
+    (41) CTLformula -> . atom
+    (42) CTLformula -> . LPAREN CTLformula RPAREN
+    (43) CTLformula -> . EX CTLformula
+    (44) CTLformula -> . EG CTLformula
+    (45) CTLformula -> . E LBRACK CTLformula U CTLformula RBRACK
+    (46) CTLformula -> . EF CTLformula
+    (47) CTLformula -> . AX CTLformula
+    (48) CTLformula -> . AG CTLformula
+    (49) CTLformula -> . A LBRACK CTLformula U CTLformula RBRACK
+    (50) CTLformula -> . AF CTLformula
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    PTRUE           shift and go to state 25
+    PFALSE          shift and go to state 26
+    NOT             shift and go to state 27
+    LPAREN          shift and go to state 29
+    EX              shift and go to state 30
+    EG              shift and go to state 31
+    E               shift and go to state 32
+    EF              shift and go to state 33
+    AX              shift and go to state 34
+    AG              shift and go to state 35
+    A               shift and go to state 36
+    AF              shift and go to state 37
+    ID              shift and go to state 14
+
+    CTLformula                     shift and go to state 165
+    atom                           shift and go to state 28
+
+state 144
+
+    (82) statement -> TRANSITION ID LPAREN paramlist RPAREN . boolexpr LBRACE effects RBRACE
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 166
+    atom                           shift and go to state 22
+
+state 145
+
+    (83) statement -> TRANSITION ID LPAREN RPAREN boolexpr . LBRACE effects RBRACE
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    LBRACE          shift and go to state 167
+    AND             shift and go to state 46
+    OR              shift and go to state 47
+    IMPL            shift and go to state 48
+    EQVI            shift and go to state 49
+
+
+state 146
+
+    (8) setexpr -> LBRACK tnumexpr COMMA . tnumexpr RBRACK
+    (57) tnumexpr -> . LPAREN numexpr RPAREN
+    (58) tnumexpr -> . NUMBER
+    (59) tnumexpr -> . ID
+    (60) tnumexpr -> . tnumexpr PLUS tnumexpr
+    (61) tnumexpr -> . tnumexpr MINUS tnumexpr
+    (62) tnumexpr -> . tnumexpr TIMES tnumexpr
+
+    LPAREN          shift and go to state 83
+    NUMBER          shift and go to state 87
+    ID              shift and go to state 82
+
+    tnumexpr                       shift and go to state 168
+
+state 147
+
+    (9) setexpr -> LBRACE stringlist RBRACE .
+
+    SEMICOLON       reduce using rule 9 (setexpr -> LBRACE stringlist RBRACE .)
+    COMMA           reduce using rule 9 (setexpr -> LBRACE stringlist RBRACE .)
+    RPAREN          reduce using rule 9 (setexpr -> LBRACE stringlist RBRACE .)
+
+
+state 148
+
+    (14) stringlist -> enum COMMA . stringlist
+    (11) stringlist -> . enum
+    (14) stringlist -> . enum COMMA stringlist
+    (12) enum -> . ID
+    (13) enum -> . NUMBER
+
+    ID              shift and go to state 120
+    NUMBER          shift and go to state 121
+
+    enum                           shift and go to state 119
+    stringlist                     shift and go to state 169
+
+state 149
+
+    (71) initlist -> atom EQ NUMBER COMMA initlist .
+
+    SEMICOLON       reduce using rule 71 (initlist -> atom EQ NUMBER COMMA initlist .)
+
+
+state 150
+
+    (57) tnumexpr -> LPAREN numexpr RPAREN .
+
+    PLUS            reduce using rule 57 (tnumexpr -> LPAREN numexpr RPAREN .)
+    MINUS           reduce using rule 57 (tnumexpr -> LPAREN numexpr RPAREN .)
+    TIMES           reduce using rule 57 (tnumexpr -> LPAREN numexpr RPAREN .)
+    COMMA           reduce using rule 57 (tnumexpr -> LPAREN numexpr RPAREN .)
+    RPAREN          reduce using rule 57 (tnumexpr -> LPAREN numexpr RPAREN .)
+    RBRACK          reduce using rule 57 (tnumexpr -> LPAREN numexpr RPAREN .)
+
+
+state 151
+
+    (63) termlist -> term COMMA termlist .
+
+    RPAREN          reduce using rule 63 (termlist -> term COMMA termlist .)
+
+
+state 152
+
+    (60) tnumexpr -> tnumexpr PLUS tnumexpr .
+    (60) tnumexpr -> tnumexpr . PLUS tnumexpr
+    (61) tnumexpr -> tnumexpr . MINUS tnumexpr
+    (62) tnumexpr -> tnumexpr . TIMES tnumexpr
+
+    PLUS            reduce using rule 60 (tnumexpr -> tnumexpr PLUS tnumexpr .)
+    MINUS           reduce using rule 60 (tnumexpr -> tnumexpr PLUS tnumexpr .)
+    COMMA           reduce using rule 60 (tnumexpr -> tnumexpr PLUS tnumexpr .)
+    RPAREN          reduce using rule 60 (tnumexpr -> tnumexpr PLUS tnumexpr .)
+    RBRACK          reduce using rule 60 (tnumexpr -> tnumexpr PLUS tnumexpr .)
+    TIMES           shift and go to state 128
+
+  ! TIMES           [ reduce using rule 60 (tnumexpr -> tnumexpr PLUS tnumexpr .) ]
+  ! PLUS            [ shift and go to state 126 ]
+  ! MINUS           [ shift and go to state 127 ]
+
+
+state 153
+
+    (61) tnumexpr -> tnumexpr MINUS tnumexpr .
+    (60) tnumexpr -> tnumexpr . PLUS tnumexpr
+    (61) tnumexpr -> tnumexpr . MINUS tnumexpr
+    (62) tnumexpr -> tnumexpr . TIMES tnumexpr
+
+    PLUS            reduce using rule 61 (tnumexpr -> tnumexpr MINUS tnumexpr .)
+    MINUS           reduce using rule 61 (tnumexpr -> tnumexpr MINUS tnumexpr .)
+    COMMA           reduce using rule 61 (tnumexpr -> tnumexpr MINUS tnumexpr .)
+    RPAREN          reduce using rule 61 (tnumexpr -> tnumexpr MINUS tnumexpr .)
+    RBRACK          reduce using rule 61 (tnumexpr -> tnumexpr MINUS tnumexpr .)
+    TIMES           shift and go to state 128
+
+  ! TIMES           [ reduce using rule 61 (tnumexpr -> tnumexpr MINUS tnumexpr .) ]
+  ! PLUS            [ shift and go to state 126 ]
+  ! MINUS           [ shift and go to state 127 ]
+
+
+state 154
+
+    (62) tnumexpr -> tnumexpr TIMES tnumexpr .
+    (60) tnumexpr -> tnumexpr . PLUS tnumexpr
+    (61) tnumexpr -> tnumexpr . MINUS tnumexpr
+    (62) tnumexpr -> tnumexpr . TIMES tnumexpr
+
+    PLUS            reduce using rule 62 (tnumexpr -> tnumexpr TIMES tnumexpr .)
+    MINUS           reduce using rule 62 (tnumexpr -> tnumexpr TIMES tnumexpr .)
+    TIMES           reduce using rule 62 (tnumexpr -> tnumexpr TIMES tnumexpr .)
+    COMMA           reduce using rule 62 (tnumexpr -> tnumexpr TIMES tnumexpr .)
+    RPAREN          reduce using rule 62 (tnumexpr -> tnumexpr TIMES tnumexpr .)
+    RBRACK          reduce using rule 62 (tnumexpr -> tnumexpr TIMES tnumexpr .)
+
+  ! PLUS            [ shift and go to state 126 ]
+  ! MINUS           [ shift and go to state 127 ]
+  ! TIMES           [ shift and go to state 128 ]
+
+
+state 155
+
+    (22) boolexpr -> EXISTS LPAREN paramlist RPAREN boolexpr .
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 22 (boolexpr -> EXISTS LPAREN paramlist RPAREN boolexpr .)
+    RPAREN          reduce using rule 22 (boolexpr -> EXISTS LPAREN paramlist RPAREN boolexpr .)
+    LBRACE          reduce using rule 22 (boolexpr -> EXISTS LPAREN paramlist RPAREN boolexpr .)
+    AND             shift and go to state 46
+    OR              shift and go to state 47
+    IMPL            shift and go to state 48
+    EQVI            shift and go to state 49
+
+  ! AND             [ reduce using rule 22 (boolexpr -> EXISTS LPAREN paramlist RPAREN boolexpr .) ]
+  ! OR              [ reduce using rule 22 (boolexpr -> EXISTS LPAREN paramlist RPAREN boolexpr .) ]
+  ! IMPL            [ reduce using rule 22 (boolexpr -> EXISTS LPAREN paramlist RPAREN boolexpr .) ]
+  ! EQVI            [ reduce using rule 22 (boolexpr -> EXISTS LPAREN paramlist RPAREN boolexpr .) ]
+
+
+state 156
+
+    (80) paramlist -> param COMMA paramlist .
+
+    RPAREN          reduce using rule 80 (paramlist -> param COMMA paramlist .)
+
+
+state 157
+
+    (81) param -> ID COLON setexpr .
+
+    COMMA           reduce using rule 81 (param -> ID COLON setexpr .)
+    RPAREN          reduce using rule 81 (param -> ID COLON setexpr .)
+
+
+state 158
+
+    (23) boolexpr -> FORALL LPAREN paramlist RPAREN boolexpr .
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    SEMICOLON       reduce using rule 23 (boolexpr -> FORALL LPAREN paramlist RPAREN boolexpr .)
+    RPAREN          reduce using rule 23 (boolexpr -> FORALL LPAREN paramlist RPAREN boolexpr .)
+    LBRACE          reduce using rule 23 (boolexpr -> FORALL LPAREN paramlist RPAREN boolexpr .)
+    AND             shift and go to state 46
+    OR              shift and go to state 47
+    IMPL            shift and go to state 48
+    EQVI            shift and go to state 49
+
+  ! AND             [ reduce using rule 23 (boolexpr -> FORALL LPAREN paramlist RPAREN boolexpr .) ]
+  ! OR              [ reduce using rule 23 (boolexpr -> FORALL LPAREN paramlist RPAREN boolexpr .) ]
+  ! IMPL            [ reduce using rule 23 (boolexpr -> FORALL LPAREN paramlist RPAREN boolexpr .) ]
+  ! EQVI            [ reduce using rule 23 (boolexpr -> FORALL LPAREN paramlist RPAREN boolexpr .) ]
+
+
+state 159
+
+    (29) boolexpr -> LBRACK numexpr GT numexpr RBRACK .
+
+    SEMICOLON       reduce using rule 29 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    AND             reduce using rule 29 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    OR              reduce using rule 29 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    IMPL            reduce using rule 29 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    EQVI            reduce using rule 29 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    RPAREN          reduce using rule 29 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+    LBRACE          reduce using rule 29 (boolexpr -> LBRACK numexpr GT numexpr RBRACK .)
+
+
+state 160
+
+    (30) boolexpr -> LBRACK numexpr LT numexpr RBRACK .
+
+    SEMICOLON       reduce using rule 30 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    AND             reduce using rule 30 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    OR              reduce using rule 30 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    IMPL            reduce using rule 30 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    EQVI            reduce using rule 30 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    RPAREN          reduce using rule 30 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+    LBRACE          reduce using rule 30 (boolexpr -> LBRACK numexpr LT numexpr RBRACK .)
+
+
+state 161
+
+    (31) boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .
+
+    SEMICOLON       reduce using rule 31 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    AND             reduce using rule 31 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    OR              reduce using rule 31 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    IMPL            reduce using rule 31 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    EQVI            reduce using rule 31 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    RPAREN          reduce using rule 31 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+    LBRACE          reduce using rule 31 (boolexpr -> LBRACK numexpr GEQ numexpr RBRACK .)
+
+
+state 162
+
+    (32) boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .
+
+    SEMICOLON       reduce using rule 32 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    AND             reduce using rule 32 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    OR              reduce using rule 32 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    IMPL            reduce using rule 32 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    EQVI            reduce using rule 32 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    RPAREN          reduce using rule 32 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+    LBRACE          reduce using rule 32 (boolexpr -> LBRACK numexpr LEQ numexpr RBRACK .)
+
+
+state 163
+
+    (33) boolexpr -> LBRACK numexpr EQ numexpr RBRACK .
+
+    SEMICOLON       reduce using rule 33 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    AND             reduce using rule 33 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    OR              reduce using rule 33 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    IMPL            reduce using rule 33 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    EQVI            reduce using rule 33 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    RPAREN          reduce using rule 33 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+    LBRACE          reduce using rule 33 (boolexpr -> LBRACK numexpr EQ numexpr RBRACK .)
+
+
+state 164
+
+    (45) CTLformula -> E LBRACK CTLformula U CTLformula . RBRACK
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    RBRACK          shift and go to state 170
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+
+state 165
+
+    (49) CTLformula -> A LBRACK CTLformula U CTLformula . RBRACK
+    (34) CTLformula -> CTLformula . AND CTLformula
+    (35) CTLformula -> CTLformula . OR CTLformula
+    (36) CTLformula -> CTLformula . IMPL CTLformula
+    (37) CTLformula -> CTLformula . EQVI CTLformula
+
+    RBRACK          shift and go to state 171
+    AND             shift and go to state 60
+    OR              shift and go to state 61
+    IMPL            shift and go to state 62
+    EQVI            shift and go to state 63
+
+
+state 166
+
+    (82) statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr . LBRACE effects RBRACE
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    LBRACE          shift and go to state 172
+    AND             shift and go to state 46
+    OR              shift and go to state 47
+    IMPL            shift and go to state 48
+    EQVI            shift and go to state 49
+
+
+state 167
+
+    (83) statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE . effects RBRACE
+    (72) effects -> . effect
+    (73) effects -> . effect effects
+    (74) effect -> . atom SEMICOLON
+    (75) effect -> . NOT atom SEMICOLON
+    (76) effect -> . atom ASSIGN numexpr SEMICOLON
+    (77) effect -> . IF boolexpr LBRACE effects RBRACE
+    (78) effect -> . FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 176
+    IF              shift and go to state 177
+    FORALL          shift and go to state 178
+    ID              shift and go to state 14
+
+    effects                        shift and go to state 173
+    effect                         shift and go to state 174
+    atom                           shift and go to state 175
+
+state 168
+
+    (8) setexpr -> LBRACK tnumexpr COMMA tnumexpr . RBRACK
+    (60) tnumexpr -> tnumexpr . PLUS tnumexpr
+    (61) tnumexpr -> tnumexpr . MINUS tnumexpr
+    (62) tnumexpr -> tnumexpr . TIMES tnumexpr
+
+    RBRACK          shift and go to state 179
+    PLUS            shift and go to state 126
+    MINUS           shift and go to state 127
+    TIMES           shift and go to state 128
+
+
+state 169
+
+    (14) stringlist -> enum COMMA stringlist .
+
+    RBRACE          reduce using rule 14 (stringlist -> enum COMMA stringlist .)
+
+
+state 170
+
+    (45) CTLformula -> E LBRACK CTLformula U CTLformula RBRACK .
+
+    SEMICOLON       reduce using rule 45 (CTLformula -> E LBRACK CTLformula U CTLformula RBRACK .)
+    AND             reduce using rule 45 (CTLformula -> E LBRACK CTLformula U CTLformula RBRACK .)
+    OR              reduce using rule 45 (CTLformula -> E LBRACK CTLformula U CTLformula RBRACK .)
+    IMPL            reduce using rule 45 (CTLformula -> E LBRACK CTLformula U CTLformula RBRACK .)
+    EQVI            reduce using rule 45 (CTLformula -> E LBRACK CTLformula U CTLformula RBRACK .)
+    RPAREN          reduce using rule 45 (CTLformula -> E LBRACK CTLformula U CTLformula RBRACK .)
+    U               reduce using rule 45 (CTLformula -> E LBRACK CTLformula U CTLformula RBRACK .)
+    RBRACK          reduce using rule 45 (CTLformula -> E LBRACK CTLformula U CTLformula RBRACK .)
+
+
+state 171
+
+    (49) CTLformula -> A LBRACK CTLformula U CTLformula RBRACK .
+
+    SEMICOLON       reduce using rule 49 (CTLformula -> A LBRACK CTLformula U CTLformula RBRACK .)
+    AND             reduce using rule 49 (CTLformula -> A LBRACK CTLformula U CTLformula RBRACK .)
+    OR              reduce using rule 49 (CTLformula -> A LBRACK CTLformula U CTLformula RBRACK .)
+    IMPL            reduce using rule 49 (CTLformula -> A LBRACK CTLformula U CTLformula RBRACK .)
+    EQVI            reduce using rule 49 (CTLformula -> A LBRACK CTLformula U CTLformula RBRACK .)
+    RPAREN          reduce using rule 49 (CTLformula -> A LBRACK CTLformula U CTLformula RBRACK .)
+    U               reduce using rule 49 (CTLformula -> A LBRACK CTLformula U CTLformula RBRACK .)
+    RBRACK          reduce using rule 49 (CTLformula -> A LBRACK CTLformula U CTLformula RBRACK .)
+
+
+state 172
+
+    (82) statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE . effects RBRACE
+    (72) effects -> . effect
+    (73) effects -> . effect effects
+    (74) effect -> . atom SEMICOLON
+    (75) effect -> . NOT atom SEMICOLON
+    (76) effect -> . atom ASSIGN numexpr SEMICOLON
+    (77) effect -> . IF boolexpr LBRACE effects RBRACE
+    (78) effect -> . FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 176
+    IF              shift and go to state 177
+    FORALL          shift and go to state 178
+    ID              shift and go to state 14
+
+    effects                        shift and go to state 180
+    effect                         shift and go to state 174
+    atom                           shift and go to state 175
+
+state 173
+
+    (83) statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects . RBRACE
+
+    RBRACE          shift and go to state 181
+
+
+state 174
+
+    (72) effects -> effect .
+    (73) effects -> effect . effects
+    (72) effects -> . effect
+    (73) effects -> . effect effects
+    (74) effect -> . atom SEMICOLON
+    (75) effect -> . NOT atom SEMICOLON
+    (76) effect -> . atom ASSIGN numexpr SEMICOLON
+    (77) effect -> . IF boolexpr LBRACE effects RBRACE
+    (78) effect -> . FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    RBRACE          reduce using rule 72 (effects -> effect .)
+    NOT             shift and go to state 176
+    IF              shift and go to state 177
+    FORALL          shift and go to state 178
+    ID              shift and go to state 14
+
+    effect                         shift and go to state 174
+    effects                        shift and go to state 182
+    atom                           shift and go to state 175
+
+state 175
+
+    (74) effect -> atom . SEMICOLON
+    (76) effect -> atom . ASSIGN numexpr SEMICOLON
+
+    SEMICOLON       shift and go to state 183
+    ASSIGN          shift and go to state 184
+
+
+state 176
+
+    (75) effect -> NOT . atom SEMICOLON
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    ID              shift and go to state 14
+
+    atom                           shift and go to state 185
+
+state 177
+
+    (77) effect -> IF . boolexpr LBRACE effects RBRACE
+    (15) boolexpr -> . boolexpr AND boolexpr
+    (16) boolexpr -> . boolexpr OR boolexpr
+    (17) boolexpr -> . boolexpr IMPL boolexpr
+    (18) boolexpr -> . boolexpr EQVI boolexpr
+    (19) boolexpr -> . NOT boolexpr
+    (20) boolexpr -> . PTRUE
+    (21) boolexpr -> . PFALSE
+    (22) boolexpr -> . EXISTS LPAREN paramlist RPAREN boolexpr
+    (23) boolexpr -> . FORALL LPAREN paramlist RPAREN boolexpr
+    (26) boolexpr -> . atom
+    (27) boolexpr -> . atom AT NUMBER
+    (28) boolexpr -> . LPAREN boolexpr RPAREN
+    (29) boolexpr -> . LBRACK numexpr GT numexpr RBRACK
+    (30) boolexpr -> . LBRACK numexpr LT numexpr RBRACK
+    (31) boolexpr -> . LBRACK numexpr GEQ numexpr RBRACK
+    (32) boolexpr -> . LBRACK numexpr LEQ numexpr RBRACK
+    (33) boolexpr -> . LBRACK numexpr EQ numexpr RBRACK
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 16
+    PTRUE           shift and go to state 17
+    PFALSE          shift and go to state 18
+    EXISTS          shift and go to state 19
+    FORALL          shift and go to state 21
+    LPAREN          shift and go to state 20
+    LBRACK          shift and go to state 23
+    ID              shift and go to state 14
+
+    boolexpr                       shift and go to state 186
+    atom                           shift and go to state 22
+
+state 178
+
+    (78) effect -> FORALL . LPAREN paramlist RPAREN LBRACE effects RBRACE
+
+    LPAREN          shift and go to state 187
+
+
+state 179
+
+    (8) setexpr -> LBRACK tnumexpr COMMA tnumexpr RBRACK .
+
+    SEMICOLON       reduce using rule 8 (setexpr -> LBRACK tnumexpr COMMA tnumexpr RBRACK .)
+    COMMA           reduce using rule 8 (setexpr -> LBRACK tnumexpr COMMA tnumexpr RBRACK .)
+    RPAREN          reduce using rule 8 (setexpr -> LBRACK tnumexpr COMMA tnumexpr RBRACK .)
+
+
+state 180
+
+    (82) statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects . RBRACE
+
+    RBRACE          shift and go to state 188
+
+
+state 181
+
+    (83) statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .
+
+    ID              reduce using rule 83 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+    TYPE            reduce using rule 83 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+    SOURCE          reduce using rule 83 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+    SOURCEFORMULA   reduce using rule 83 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+    CTLTARGET       reduce using rule 83 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+    TRANSITION      reduce using rule 83 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+    $end            reduce using rule 83 (statement -> TRANSITION ID LPAREN RPAREN boolexpr LBRACE effects RBRACE .)
+
+
+state 182
+
+    (73) effects -> effect effects .
+
+    RBRACE          reduce using rule 73 (effects -> effect effects .)
+
+
+state 183
+
+    (74) effect -> atom SEMICOLON .
+
+    NOT             reduce using rule 74 (effect -> atom SEMICOLON .)
+    IF              reduce using rule 74 (effect -> atom SEMICOLON .)
+    FORALL          reduce using rule 74 (effect -> atom SEMICOLON .)
+    ID              reduce using rule 74 (effect -> atom SEMICOLON .)
+    RBRACE          reduce using rule 74 (effect -> atom SEMICOLON .)
+
+
+state 184
+
+    (76) effect -> atom ASSIGN . numexpr SEMICOLON
+    (51) numexpr -> . LPAREN numexpr RPAREN
+    (52) numexpr -> . NUMBER
+    (53) numexpr -> . atom
+    (54) numexpr -> . numexpr PLUS numexpr
+    (55) numexpr -> . numexpr MINUS numexpr
+    (56) numexpr -> . numexpr TIMES numexpr
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    LPAREN          shift and go to state 56
+    NUMBER          shift and go to state 57
+    ID              shift and go to state 14
+
+    atom                           shift and go to state 58
+    numexpr                        shift and go to state 189
+
+state 185
+
+    (75) effect -> NOT atom . SEMICOLON
+
+    SEMICOLON       shift and go to state 190
+
+
+state 186
+
+    (77) effect -> IF boolexpr . LBRACE effects RBRACE
+    (15) boolexpr -> boolexpr . AND boolexpr
+    (16) boolexpr -> boolexpr . OR boolexpr
+    (17) boolexpr -> boolexpr . IMPL boolexpr
+    (18) boolexpr -> boolexpr . EQVI boolexpr
+
+    LBRACE          shift and go to state 191
+    AND             shift and go to state 46
+    OR              shift and go to state 47
+    IMPL            shift and go to state 48
+    EQVI            shift and go to state 49
+
+
+state 187
+
+    (78) effect -> FORALL LPAREN . paramlist RPAREN LBRACE effects RBRACE
+    (79) paramlist -> . param
+    (80) paramlist -> . param COMMA paramlist
+    (81) param -> . ID COLON setexpr
+
+    ID              shift and go to state 94
+
+    paramlist                      shift and go to state 192
+    param                          shift and go to state 93
+
+state 188
+
+    (82) statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .
+
+    ID              reduce using rule 82 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+    TYPE            reduce using rule 82 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+    SOURCE          reduce using rule 82 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+    SOURCEFORMULA   reduce using rule 82 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+    CTLTARGET       reduce using rule 82 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+    TRANSITION      reduce using rule 82 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+    $end            reduce using rule 82 (statement -> TRANSITION ID LPAREN paramlist RPAREN boolexpr LBRACE effects RBRACE .)
+
+
+state 189
+
+    (76) effect -> atom ASSIGN numexpr . SEMICOLON
+    (54) numexpr -> numexpr . PLUS numexpr
+    (55) numexpr -> numexpr . MINUS numexpr
+    (56) numexpr -> numexpr . TIMES numexpr
+
+    SEMICOLON       shift and go to state 193
+    PLUS            shift and go to state 103
+    MINUS           shift and go to state 104
+    TIMES           shift and go to state 105
+
+
+state 190
+
+    (75) effect -> NOT atom SEMICOLON .
+
+    NOT             reduce using rule 75 (effect -> NOT atom SEMICOLON .)
+    IF              reduce using rule 75 (effect -> NOT atom SEMICOLON .)
+    FORALL          reduce using rule 75 (effect -> NOT atom SEMICOLON .)
+    ID              reduce using rule 75 (effect -> NOT atom SEMICOLON .)
+    RBRACE          reduce using rule 75 (effect -> NOT atom SEMICOLON .)
+
+
+state 191
+
+    (77) effect -> IF boolexpr LBRACE . effects RBRACE
+    (72) effects -> . effect
+    (73) effects -> . effect effects
+    (74) effect -> . atom SEMICOLON
+    (75) effect -> . NOT atom SEMICOLON
+    (76) effect -> . atom ASSIGN numexpr SEMICOLON
+    (77) effect -> . IF boolexpr LBRACE effects RBRACE
+    (78) effect -> . FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 176
+    IF              shift and go to state 177
+    FORALL          shift and go to state 178
+    ID              shift and go to state 14
+
+    effects                        shift and go to state 194
+    effect                         shift and go to state 174
+    atom                           shift and go to state 175
+
+state 192
+
+    (78) effect -> FORALL LPAREN paramlist . RPAREN LBRACE effects RBRACE
+
+    RPAREN          shift and go to state 195
+
+
+state 193
+
+    (76) effect -> atom ASSIGN numexpr SEMICOLON .
+
+    NOT             reduce using rule 76 (effect -> atom ASSIGN numexpr SEMICOLON .)
+    IF              reduce using rule 76 (effect -> atom ASSIGN numexpr SEMICOLON .)
+    FORALL          reduce using rule 76 (effect -> atom ASSIGN numexpr SEMICOLON .)
+    ID              reduce using rule 76 (effect -> atom ASSIGN numexpr SEMICOLON .)
+    RBRACE          reduce using rule 76 (effect -> atom ASSIGN numexpr SEMICOLON .)
+
+
+state 194
+
+    (77) effect -> IF boolexpr LBRACE effects . RBRACE
+
+    RBRACE          shift and go to state 196
+
+
+state 195
+
+    (78) effect -> FORALL LPAREN paramlist RPAREN . LBRACE effects RBRACE
+
+    LBRACE          shift and go to state 197
+
+
+state 196
+
+    (77) effect -> IF boolexpr LBRACE effects RBRACE .
+
+    NOT             reduce using rule 77 (effect -> IF boolexpr LBRACE effects RBRACE .)
+    IF              reduce using rule 77 (effect -> IF boolexpr LBRACE effects RBRACE .)
+    FORALL          reduce using rule 77 (effect -> IF boolexpr LBRACE effects RBRACE .)
+    ID              reduce using rule 77 (effect -> IF boolexpr LBRACE effects RBRACE .)
+    RBRACE          reduce using rule 77 (effect -> IF boolexpr LBRACE effects RBRACE .)
+
+
+state 197
+
+    (78) effect -> FORALL LPAREN paramlist RPAREN LBRACE . effects RBRACE
+    (72) effects -> . effect
+    (73) effects -> . effect effects
+    (74) effect -> . atom SEMICOLON
+    (75) effect -> . NOT atom SEMICOLON
+    (76) effect -> . atom ASSIGN numexpr SEMICOLON
+    (77) effect -> . IF boolexpr LBRACE effects RBRACE
+    (78) effect -> . FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE
+    (66) atom -> . ID
+    (67) atom -> . ID LPAREN termlist RPAREN
+
+    NOT             shift and go to state 176
+    IF              shift and go to state 177
+    FORALL          shift and go to state 178
+    ID              shift and go to state 14
+
+    effects                        shift and go to state 198
+    effect                         shift and go to state 174
+    atom                           shift and go to state 175
+
+state 198
+
+    (78) effect -> FORALL LPAREN paramlist RPAREN LBRACE effects . RBRACE
+
+    RBRACE          shift and go to state 199
+
+
+state 199
+
+    (78) effect -> FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE .
+
+    NOT             reduce using rule 78 (effect -> FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE .)
+    IF              reduce using rule 78 (effect -> FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE .)
+    FORALL          reduce using rule 78 (effect -> FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE .)
+    ID              reduce using rule 78 (effect -> FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE .)
+    RBRACE          reduce using rule 78 (effect -> FORALL LPAREN paramlist RPAREN LBRACE effects RBRACE .)
+

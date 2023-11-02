@@ -1,0 +1,79 @@
+
+This program reads a file that contains a model
+of a transition system, parses the file,
+grounds the specification, and finally runs the
+CTL model-checking algorithm that uses BDDs.
+
+INSTALLATION AND USE
+
+To run the program you need
+
+  Python 3.x
+  PLY, which is a parser/lexer tool for Python
+  tulip / dd
+  PySMT
+
+To install these in some Linux variants (e.g. Ubuntu), write
+
+  sudo apt-get install python3 python3-ply
+  pip3 install dd
+  pip3 install pysmt
+  pysmt-install --msat
+
+To run the BDD-based CTL model-checker write e.g.
+
+  python3 ctlmodelchecker.py CTLROUTES-EGT-true.SPEC
+
+
+For the documentation of the component libraries, see
+   https://www.dabeaz.com/ply/
+   https://github.com/pysmt/pysmt
+   https://github.com/tulip-control/dd
+
+
+
+THE SPECIFICATION LANGUAGE
+
+If there is only one initial/source state, it can be expressed
+by using the 'source' declaration, which lists the values of
+the True Boolean variables, e.g.
+
+  source A, B, C;
+
+If there are multiple initial/source states, then that set has
+to be specified as a formula. The keyword in this case is
+'sourceformula', and an example is as follows.
+
+  sourceformula A and not B;
+
+To express CTL formulas to be model-checked, use the 'ctltarget'
+keyword. For example, EG(A U B) would be expressed as
+
+  ctltarget ctlEG E [ A U B ];
+
+Naming sets of strings or numbers or intervals of numbers is possible
+with 'type'. For example,
+
+  type weekdaysn=[1,7];
+  type weekdays = { Mon, Tue, Wed, Thu, Fri, Sat, Sun };
+
+Transition rules are parametric, and multiple "ground" transition
+rules can be compactly described by parameterizing with one or
+more parameters. The parameters can appear as part of the _names_
+of both Boolean and numeric state variables. After the name and
+parameters, one has to declare the _condition_ of the transition
+and the _effects_ of the transition. For example,
+
+  transition gofurther(x : [1,10])
+  location(x)
+  {
+    not location(x);
+    location(x+1);
+  }
+
+A transition's parameters (like 'x' above) can currently only occur
+in one of the _terms_ of a structured variable name, like in
+location(x) or location(x+1) above. Current code would not allow
+    cost := cost + x;
+as an effect, or formulas with [A = x+1] with 'x' occurring
+in an expression that is not a state variable name.
